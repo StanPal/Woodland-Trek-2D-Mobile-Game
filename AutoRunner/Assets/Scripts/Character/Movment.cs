@@ -35,6 +35,13 @@ public class Movment : MonoBehaviour
     private void Update()
     {
         _moveX = SimpleInput.GetAxis("Horizontal");
+
+        if(IsGrounded() && Input.GetButtonDown("Jump"))
+        {       
+            _rb.velocity = Vector2.up * _jumpForce;
+            _animator.SetBool("IsJumping", true);
+        }
+    
     }
 
     private void FixedUpdate()
@@ -47,7 +54,7 @@ public class Movment : MonoBehaviour
 
     public void Jump()
     {
-        OnJump?.Invoke();
+        OnJump?.Invoke();        
     }
 
     private void Movment_OnJump()
