@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movment : MonoBehaviour
 {
+    private event System.Action OnJump;
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator; 
@@ -26,15 +27,14 @@ public class Movment : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        OnJump += Movment_OnJump;
+    }
+    
     private void Update()
     {
-        _moveX = Input.GetAxisRaw("Horizontal");
-        if(IsGrounded() && Input.GetButtonDown("Jump"))
-        {       
-            _rb.velocity = Vector2.up * _jumpForce;
-            _animator.SetBool("IsJumping", true);
-        }
-    
+        _moveX = SimpleInput.GetAxis("Horizontal");
     }
 
     private void FixedUpdate()
@@ -45,6 +45,19 @@ public class Movment : MonoBehaviour
         _animator.SetFloat("Speed", Mathf.Abs(movement.x));
     }
 
+    public void Jump()
+    {
+        OnJump?.Invoke();
+    }
+
+    private void Movment_OnJump()
+    {
+        if (IsGrounded())
+        {
+            _rb.velocity = Vector2.up * _jumpForce;
+            _animator.SetBool("IsJumping", true);
+        }
+    }
 
     public bool IsGrounded()
     {
@@ -67,12 +80,12 @@ public class Movment : MonoBehaviour
     private void FlipCharacter()
     {
         Vector3 characterScale = transform.localScale;
-        if(Input.GetAxis("Horizontal") < 0)
+        if (SimpleInput.GetAxis("Horizontal") < 0)
         {
             characterScale.x = -1;
             
         }
-        if(Input.GetAxis("Horizontal") > 0)
+        if (SimpleInput.GetAxis("Horizontal") > 0)
         {
             characterScale.x = 1;
         }
