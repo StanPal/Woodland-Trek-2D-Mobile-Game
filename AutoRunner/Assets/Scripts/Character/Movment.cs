@@ -6,15 +6,16 @@ public class Movment : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
+    private Animator _animator; 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
 
     private BoxCollider2D _boxCollider; 
-
+    
     private bool _isGrounded;
     private float _moveX;
     private float _moveY;
-    
+
     public LayerMask _groundLayer;
 
     private void Awake()
@@ -22,23 +23,26 @@ public class Movment : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _sprite = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         _moveX = Input.GetAxisRaw("Horizontal");
         if(IsGrounded() && Input.GetButtonDown("Jump"))
-        {
+        {       
             _rb.velocity = Vector2.up * _jumpForce;
+            _animator.SetBool("IsJumping", true);
         }
+    
     }
 
     private void FixedUpdate()
     {
-        Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
-        _rb.velocity = movement;
-
         FlipCharacter();
+        Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
+        _rb.velocity = movement; 
+        _animator.SetFloat("Speed", Mathf.Abs(movement.x));
     }
 
 
@@ -62,14 +66,17 @@ public class Movment : MonoBehaviour
 
     private void FlipCharacter()
     {
-        if(_rb.velocity.x < 0)
+        Vector3 characterScale = transform.localScale;
+        if(Input.GetAxis("Horizontal") < 0)
         {
-            _sprite.flipX = true;
+            characterScale.x = -1;
+            
         }
-        else
+        if(Input.GetAxis("Horizontal") > 0)
         {
-            _sprite.flipX = false;
+            characterScale.x = 1;
+        }
 
-        }
+        transform.localScale = characterScale;
     }
 }
