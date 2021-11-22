@@ -10,7 +10,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if(collision.collider.GetComponent<Trap>())
         {
-            OnDeath?.Invoke(this.gameObject);            
+            OnDeath?.Invoke(this.gameObject);
         }
-    }
+    }    
 }
