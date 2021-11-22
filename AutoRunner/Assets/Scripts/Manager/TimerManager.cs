@@ -4,8 +4,9 @@ using UnityEngine.UI;
 public class TimerManager : MonoBehaviour
 {
     public event System.Action OnTimerStopped; 
-
     private SpawnManager _spawnManager;
+
+    public GameObject _winPanel;
     private Goal _goal;
     private bool _isPlaying;
     private float _currentTime;
@@ -24,6 +25,20 @@ public class TimerManager : MonoBehaviour
         _isPlaying = true;
         _goal.OnReachedGoal += OnReachedGoal;
         _spawnManager.OnRespawn += OnRespawn;
+        OnTimerStopped += ToggleWinPanel;
+    }
+
+    private void ToggleWinPanel()
+    {
+        if (_winPanel.activeSelf == false)
+        {
+            Time.timeScale = 0;
+            _winPanel.SetActive(true);
+        }
+        else
+        {
+            _winPanel.SetActive(false);
+        }
     }
 
     private void OnRespawn()

@@ -3,32 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    private TimerManager _timerManager;
-    public GameObject _winPanel; 
-
-    private void Awake()
-    {
-        _timerManager = FindObjectOfType<TimerManager>();
-    }
-
-    private void Start()
-    {
-        _timerManager.OnTimerStopped += ToggleWinPanel;
-    }
-
-    private void ToggleWinPanel()
-    {
-        if(_winPanel.activeSelf == false)
-        {
-            Time.timeScale = 0;
-            _winPanel.SetActive(true);
-        }
-        else
-        {            
-            _winPanel.SetActive(false);
-        }
-    }
-
     public void ReplayLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
