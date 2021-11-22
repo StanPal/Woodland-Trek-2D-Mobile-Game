@@ -15,6 +15,12 @@ public class UIManager : MonoBehaviour
         Reset();
     }
 
+    public void GoToMain()
+    {
+        SceneManager.LoadScene(0);
+        Reset();
+    }
+
     public void Quit()
     {
         Application.Quit();
