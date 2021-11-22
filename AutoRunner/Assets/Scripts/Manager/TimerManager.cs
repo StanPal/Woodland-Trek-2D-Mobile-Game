@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
+    public event System.Action OnTimerStopped; 
+
+    private SpawnManager _spawnManager;
     private Goal _goal;
-    private SpawnManager _spawnManager; 
-
     private bool _isPlaying;
-    public bool Playing { set => _isPlaying = value; }
-    public Text TimerText;
     private float _currentTime;
+    public Text TimerText;
 
-    // Update is called once per frame
-
+    public bool Playing { set => _isPlaying = value; }
+    
     private void Awake()
     {
         _goal = FindObjectOfType<Goal>();
@@ -36,7 +34,8 @@ public class TimerManager : MonoBehaviour
 
     private void OnReachedGoal()
     {
-        _isPlaying = false; 
+        _isPlaying = false;
+        OnTimerStopped?.Invoke();
     }
 
     void Update()
