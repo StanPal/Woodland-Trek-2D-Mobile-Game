@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movment : MonoBehaviour
@@ -12,8 +10,7 @@ public class Movment : MonoBehaviour
     [SerializeField] private float _jumpForce;
 
     private BoxCollider2D _boxCollider;
-
-    private bool _isJumping; 
+    
     private bool _isGrounded;
     private float _moveX;
     private float _moveY;
@@ -68,7 +65,6 @@ public class Movment : MonoBehaviour
         {
             _rb.velocity = Vector2.up * _jumpForce;
             _animator.SetBool("IsJumping", true);
-            _isJumping = true;
         }   
 
     }
