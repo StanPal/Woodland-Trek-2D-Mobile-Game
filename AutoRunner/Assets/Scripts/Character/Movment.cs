@@ -11,8 +11,9 @@ public class Movment : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
 
-    private BoxCollider2D _boxCollider; 
-    
+    private BoxCollider2D _boxCollider;
+
+    private bool _isJumping; 
     private bool _isGrounded;
     private float _moveX;
     private float _moveY;
@@ -50,11 +51,15 @@ public class Movment : MonoBehaviour
         Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
         _rb.velocity = movement; 
         _animator.SetFloat("Speed", Mathf.Abs(movement.x));
+        if(IsGrounded())
+        {
+            _animator.SetBool("IsJumping", false);
+        }
     }
 
     public void Jump()
     {
-        OnJump?.Invoke();        
+        OnJump?.Invoke();
     }
 
     private void Movment_OnJump()
@@ -63,7 +68,9 @@ public class Movment : MonoBehaviour
         {
             _rb.velocity = Vector2.up * _jumpForce;
             _animator.SetBool("IsJumping", true);
-        }
+            _isJumping = true;
+        }   
+
     }
 
     public bool IsGrounded()
