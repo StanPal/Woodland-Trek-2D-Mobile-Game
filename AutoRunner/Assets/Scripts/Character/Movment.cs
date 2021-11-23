@@ -3,6 +3,8 @@ using UnityEngine;
 public class Movment : MonoBehaviour
 {
     private event System.Action OnJump;
+    private event System.Action OnHoldJump;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator; 
@@ -28,8 +30,9 @@ public class Movment : MonoBehaviour
     private void Start()
     {
         OnJump += Movment_OnJump;
-    }
-    
+        OnHoldJump += Movment_OnHoldJump;
+    }    
+
     private void Update()
     {
         _moveX = SimpleInput.GetAxis("Horizontal");
@@ -66,7 +69,19 @@ public class Movment : MonoBehaviour
             _rb.velocity = Vector2.up * _jumpForce;
             _animator.SetBool("IsJumping", true);
         }   
+    }
+    public void HoldJump()
+    {
+        OnHoldJump?.Invoke();
+    }
 
+    private void Movment_OnHoldJump()
+    {
+        if (IsGrounded())
+        {
+            _rb.velocity = Vector2.up * _jumpForce * 2f;
+            _animator.SetBool("IsJumping", true);
+        }
     }
 
     public bool IsGrounded()
