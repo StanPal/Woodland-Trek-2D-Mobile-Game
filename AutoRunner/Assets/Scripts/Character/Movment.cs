@@ -71,7 +71,7 @@ public class Movment : MonoBehaviour
 
     public bool IsGrounded()
     {
-        float extraHeight = 0.05f;
+        float extraHeight = 0.05f;        
         RaycastHit2D raycastHit = Physics2D.Raycast(_boxCollider.bounds.center, Vector2.down, _boxCollider.bounds.extents.y + extraHeight, _groundLayer);
         Color rayColor;
         

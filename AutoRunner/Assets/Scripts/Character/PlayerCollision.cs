@@ -12,5 +12,15 @@ public class PlayerCollision : MonoBehaviour
         {
             OnDeath?.Invoke(this.gameObject);
         }
-    }    
+
+        if(collision.collider.tag == "MovingPlatform")
+        {
+            transform.parent = collision.collider.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        transform.parent = null;
+    }
 }
