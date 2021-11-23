@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Movment : MonoBehaviour
 {
+    public Transform Feet;
+
     private event System.Action OnJump;
     private event System.Action OnHoldJump;
 
@@ -79,14 +81,15 @@ public class Movment : MonoBehaviour
     {
         if (IsGrounded())
         {
-            _rb.velocity = Vector2.up * _jumpForce * 2f;
+            _rb.velocity = Vector2.up * _jumpForce;
             _animator.SetBool("IsJumping", true);
         }
     }
 
     public bool IsGrounded()
     {
-        float extraHeight = 0.05f;        
+        float extraHeight = 0.05f;
+        Collider2D groundCheck = Physics2D.OverlapCircle(Feet.position, 0.5f, _groundLayer);
         RaycastHit2D raycastHit = Physics2D.Raycast(_boxCollider.bounds.center, Vector2.down, _boxCollider.bounds.extents.y + extraHeight, _groundLayer);
         Color rayColor;
         
@@ -99,7 +102,18 @@ public class Movment : MonoBehaviour
             rayColor = Color.red;
         }
         Debug.DrawRay(_boxCollider.bounds.center, Vector2.down * (_boxCollider.bounds.extents.y + extraHeight), rayColor);
-        return raycastHit.collider != null;
+
+        if(groundCheck != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+        //return raycastHit.collider != null;
     }
 
     private void FlipCharacter()
