@@ -33,5 +33,10 @@ public class PlayerCollision : MonoBehaviour
             OnCoinPickup?.Invoke();
             Destroy(collision.gameObject);
         }
+
+        if(collision.tag == "Trap")
+        {
+            OnDeath?.Invoke(this.gameObject);
+        }
     }
 }
