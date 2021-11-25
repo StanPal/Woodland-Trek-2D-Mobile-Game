@@ -45,6 +45,9 @@ TagManager:
   - name: Background
     uniqueID: 4224645719
     locked: 0
+  - name: Trap
+    uniqueID: 1142945375
+    locked: 0
   - name: Platform
     uniqueID: 1189995171
     locked: 0
