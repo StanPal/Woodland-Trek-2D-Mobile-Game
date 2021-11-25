@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
-    public event System.Action OnTimerStopped; 
+    public event System.Action OnTimerStopped;
+    public event System.Action<string> OnGoalReached; 
     private SpawnManager _spawnManager;
 
     public GameObject _winPanel;
@@ -11,6 +13,7 @@ public class TimerManager : MonoBehaviour
     private bool _isPlaying;
     private float _currentTime;
     public Text TimerText;
+    public Text BestTime;
 
     public bool Playing { set => _isPlaying = value; }
     
@@ -51,6 +54,9 @@ public class TimerManager : MonoBehaviour
     {
         _isPlaying = false;
         OnTimerStopped?.Invoke();
+        OnGoalReached?.Invoke(TimerText.text);
+
+        BestTime.text = PlayerPrefs.GetString(SceneManager.GetActiveScene().name);
     }
 
     void Update()
