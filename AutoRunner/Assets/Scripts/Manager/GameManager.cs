@@ -16,8 +16,9 @@ public class GameManager : MonoBehaviour
         _timerManager.OnGoalReached += SaveTime;
     }
 
-    private void SaveTime(string time)
+    private void SaveTime(float time)
     {
-        PlayerPrefs.SetString(SceneManager.GetActiveScene().name, time);
+        PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name, time);
+        
     }
 }
