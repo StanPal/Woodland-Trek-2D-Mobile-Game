@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,8 +21,19 @@ public class TimerManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.OnGameStateChanged += GameManagerOnGameStateChanged;
         _goal = FindObjectOfType<Goal>();
         _spawnManager = FindObjectOfType<SpawnManager>();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManagerOnGameStateChanged;
+    }
+
+    private void GameManagerOnGameStateChanged(GameState state)
+    {
+      
     }
 
     private void Start()
@@ -49,12 +61,15 @@ public class TimerManager : MonoBehaviour
 
     private void OnRespawn()
     {
+        GameManager.Instance.UpdateGameState(GameState.Respawn);
         _currentTime = 0;
         _isPlaying = true;
+        GameManager.Instance.UpdateGameState(GameState.LevelStart);
     }
 
     private void OnReachedGoal()
     {
+        GameManager.Instance.UpdateGameState(GameState.GoalReached);
         _isPlaying = false;
         OnTimerStopped?.Invoke();
 
@@ -64,7 +79,6 @@ public class TimerManager : MonoBehaviour
         {
             OnGoalReached?.Invoke(_currentTime);
             _isNewBest = true;
-            Debug.Log("BetterTimeReached");
         }
         
         if (_isNewBest)
