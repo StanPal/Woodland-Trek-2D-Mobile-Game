@@ -134,22 +134,23 @@ public class Movment : MonoBehaviour
         {
             _rb.velocity = Vector2.up * _jumpForce;
             _animator.SetBool("IsJumping", true);
-        }        
-        else if(OnWall() && !IsGrounded())
-        {
-            _wallJumpTime = 0;
-            // 3 is power pushed away from wall, 6 is power pushed up 
-            _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
         }
+        else if (OnWall() && !IsGrounded())
+        {
+            if (_moveX == 0)
+            {
+                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
+                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
+            }
+            else
+            {
+                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
 
+            }
+            _wallJumpTime = 0;
+        }
     }
-
-    //private bool IsGrounded()
-    //{
-    //    RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0, Vector2.down, 0.1f, _groundLayer);
-    //    return raycastHit.collider != null;
-    //}
 
     public bool IsGrounded()
     {
