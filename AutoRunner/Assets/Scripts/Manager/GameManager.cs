@@ -20,7 +20,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.GameStart);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            UpdateGameState(GameState.GameStart);
+        }
+        else
+        {
+            UpdateGameState(GameState.LevelStart);
+        }
     }
 
     private void SaveTime(float time)
