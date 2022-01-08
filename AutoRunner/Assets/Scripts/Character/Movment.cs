@@ -15,14 +15,12 @@ public class Movment : MonoBehaviour
     private Animator _animator; 
     private BoxCollider2D _boxCollider;
 
-    private bool _isTouchingFront = true;
-    private bool _isWallSliding;
+    
     private bool _isGrounded;
     private float _moveX;
     private float _moveY;
     private float _groundRadius = 0.5f;
-    private float _jumpTime;
-    private RaycastHit2D _wallCheckHit; 
+    private float _jumpTime;    
 
     [Header("Horizontal Movement")]
     [SerializeField] private float _moveSpeed;
@@ -31,9 +29,13 @@ public class Movment : MonoBehaviour
     [SerializeField] private float _jumpForce;
 
     [Header("Wall Jump")]
-    [SerializeField] private float _wallJumpTime = 0.2f;
-    [SerializeField] private float _wallSlidingSpeed = 0.3f;
-    [SerializeField] private float _wallDistance = 0.5f;
+    [SerializeField] private float _wallJumpTime = 0.0f;
+    [SerializeField] private float _wallPushX = 0.0f;
+    [SerializeField] private float _wallPushY = 0.0f;
+
+
+    private RaycastHit2D _wallCheckHit;
+    private bool _isWallSliding;
 
     private void Awake()
     {
@@ -53,14 +55,34 @@ public class Movment : MonoBehaviour
     {
         _moveX = SimpleInput.GetAxis("Horizontal");
 
-        if(IsGrounded() && Input.GetButtonDown("Jump") || _isWallSliding && Input.GetButton("Jump"))
-        {       
-            _rb.velocity = Vector2.up * _jumpForce;
+        if(IsGrounded() && Input.GetButtonDown("Jump"))
+        {
+            Jump();
             _animator.SetBool("IsJumping", true);
         }
 
-        //_isTouchingFront = Physics2D.OverlapCircle(FrontCheck.position, _groundRadius);
+        if (_wallJumpTime > 0.2f)
+        {
+            _rb.velocity = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
 
+            if (OnWall() && !IsGrounded())
+            {
+                _rb.gravityScale = 0.5f;
+                _rb.velocity = Vector2.zero;
+            }
+            else
+            {
+                _rb.gravityScale = 1;
+            }
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
+        }
+        else
+        {
+            _wallJumpTime += Time.deltaTime;
+        }        
     }
 
     private void FixedUpdate()
@@ -69,27 +91,7 @@ public class Movment : MonoBehaviour
         Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
         _rb.velocity = movement; 
         _animator.SetFloat("Speed", Mathf.Abs(movement.x));
-   
-        if (_isTouchingFront)
-        {
-            _wallCheckHit = Physics2D.Raycast(transform.position, new Vector2(_wallDistance, 0), _wallDistance, _wallLayer);
-        }
-        else
-        {
-            _wallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-_wallDistance, 0), _wallDistance, _wallLayer);
-        }
-
-        if (_wallCheckHit && !IsGrounded() && _moveX != 0)
-        {
-            _isWallSliding = true;
-            _jumpTime = Time.time + _wallJumpTime;
-        }
-        else if (_jumpTime < Time.time)
-        {
-            _isWallSliding = false;
-        }
-
-        
+                  
     }
 
     public void Jump()
@@ -101,13 +103,23 @@ public class Movment : MonoBehaviour
     {
         if (IsGrounded())
         {
-            _rb.velocity = Vector2.up * _jumpForce;
+            _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
             _animator.SetBool("IsJumping", true);
         }
-
-        if (_isWallSliding)
+        else if (OnWall() && !IsGrounded())
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, _wallSlidingSpeed, float.MaxValue));
+            if(_moveX == 0)
+            {
+                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
+                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+            }
+            else
+            {
+                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
+
+            }
+            _wallJumpTime = 0;
         }
 
     }
@@ -123,7 +135,21 @@ public class Movment : MonoBehaviour
             _rb.velocity = Vector2.up * _jumpForce;
             _animator.SetBool("IsJumping", true);
         }        
+        else if(OnWall() && !IsGrounded())
+        {
+            _wallJumpTime = 0;
+            // 3 is power pushed away from wall, 6 is power pushed up 
+            _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+        }
+
+
     }
+
+    //private bool IsGrounded()
+    //{
+    //    RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0, Vector2.down, 0.1f, _groundLayer);
+    //    return raycastHit.collider != null;
+    //}
 
     public bool IsGrounded()
     {
@@ -131,8 +157,8 @@ public class Movment : MonoBehaviour
         Collider2D groundCheck = Physics2D.OverlapCircle(Feet.position, _groundRadius, _groundLayer);
         RaycastHit2D raycastHit = Physics2D.Raycast(_boxCollider.bounds.center, Vector2.down, _boxCollider.bounds.extents.y + extraHeight, _groundLayer);
         Color rayColor;
-        
-        if(raycastHit.collider != null)
+
+        if (raycastHit.collider != null)
         {
             rayColor = Color.green;
         }
@@ -142,7 +168,7 @@ public class Movment : MonoBehaviour
         }
         Debug.DrawRay(_boxCollider.bounds.center, Vector2.down * (_boxCollider.bounds.extents.y + extraHeight), rayColor);
 
-        if(groundCheck != null)
+        if (groundCheck != null)
         {
             _animator.SetBool("IsJumping", false);
             return true;
@@ -151,9 +177,12 @@ public class Movment : MonoBehaviour
         {
             return false;
         }
+    }
 
-
-        //return raycastHit.collider != null;
+    private bool OnWall()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, _wallLayer);
+        return raycastHit.collider != null;
     }
 
     private void FlipCharacter()
