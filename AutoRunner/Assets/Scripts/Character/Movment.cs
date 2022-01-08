@@ -69,12 +69,7 @@ public class Movment : MonoBehaviour
         Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
         _rb.velocity = movement; 
         _animator.SetFloat("Speed", Mathf.Abs(movement.x));
-
-        if(IsGrounded())
-        {
-            _animator.SetBool("IsJumping", false);
-        }
-
+   
         if (_isTouchingFront)
         {
             _wallCheckHit = Physics2D.Raycast(transform.position, new Vector2(_wallDistance, 0), _wallDistance, _wallLayer);
@@ -149,6 +144,7 @@ public class Movment : MonoBehaviour
 
         if(groundCheck != null)
         {
+            _animator.SetBool("IsJumping", false);
             return true;
         }
         else
