@@ -10,12 +10,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Minimap
   - Water
   - UI
   - Ground
   - Wall
-  - Minimap
+  - 
   - 
   - 
   - 
