@@ -13,7 +13,7 @@ public class Movment : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator; 
-    private BoxCollider2D _boxCollider;
+    private CapsuleCollider2D _capsuleCollider;
 
     
     private bool _isGrounded;
@@ -41,7 +41,7 @@ public class Movment : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _sprite = GetComponent<SpriteRenderer>();
-        _boxCollider = GetComponent<BoxCollider2D>();
+        _capsuleCollider = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
     }
 
@@ -156,7 +156,7 @@ public class Movment : MonoBehaviour
     {
         float extraHeight = 0.05f;
         Collider2D groundCheck = Physics2D.OverlapCircle(Feet.position, _groundRadius, _groundLayer);
-        RaycastHit2D raycastHit = Physics2D.Raycast(_boxCollider.bounds.center, Vector2.down, _boxCollider.bounds.extents.y + extraHeight, _groundLayer);
+        RaycastHit2D raycastHit = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeight, _groundLayer);
         Color rayColor;
 
         if (raycastHit.collider != null)
@@ -167,7 +167,7 @@ public class Movment : MonoBehaviour
         {
             rayColor = Color.red;
         }
-        Debug.DrawRay(_boxCollider.bounds.center, Vector2.down * (_boxCollider.bounds.extents.y + extraHeight), rayColor);
+        Debug.DrawRay(_capsuleCollider.bounds.center, Vector2.down * (_capsuleCollider.bounds.extents.y + extraHeight), rayColor);
 
         if (groundCheck != null)
         {
@@ -182,7 +182,7 @@ public class Movment : MonoBehaviour
 
     private bool OnWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, _wallLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(_capsuleCollider.bounds.center, _capsuleCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, _wallLayer);
         return raycastHit.collider != null;
     }
 
