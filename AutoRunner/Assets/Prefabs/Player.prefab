@@ -123,9 +123,9 @@ GameObject:
   - component: {fileID: 7189052396422042225}
   - component: {fileID: 7189052396422042226}
   - component: {fileID: 7189052396422042224}
+  - component: {fileID: 1035521768610928550}
   - component: {fileID: 7189052396422042238}
   - component: {fileID: 7189052396422042236}
-  - component: {fileID: 1035521768610928550}
   - component: {fileID: 7189052396422042237}
   - component: {fileID: 7189052396448244569}
   m_Layer: 0
@@ -223,6 +223,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &1035521768610928550
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7189052396422042227}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.045098305, y: -0.24522245}
+  m_Size: {x: 1.4362698, y: 1.5546534}
+  m_Direction: 0
 --- !u!114 &7189052396422042238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +256,7 @@ MonoBehaviour:
     m_Bits: 64
   _wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   Feet: {fileID: 1237357527}
   _moveSpeed: 10
   _jumpForce: 10
@@ -259,22 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282c006038ab4d044a0c901da437fbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &1035521768610928550
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7189052396422042227}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.045098305, y: -0.24522245}
-  m_Size: {x: 1.4362698, y: 1.5546534}
-  m_Direction: 0
 --- !u!95 &7189052396422042237
 Animator:
   serializedVersion: 3

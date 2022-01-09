@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Movment : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     private event System.Action OnJump;
     private event System.Action OnHoldJump;

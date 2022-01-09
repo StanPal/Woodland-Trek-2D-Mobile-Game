@@ -6,11 +6,21 @@ public class PlayerCollision : MonoBehaviour
 {
     public event System.Action<GameObject> OnDeath;
     public event System.Action OnCoinPickup;
+    private Animator _animator;    
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.GetComponent<Trap>())
         {
+            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            this.GetComponent<Movement>().enabled = false;
+            _animator.SetBool("IsDead",true);
+            //gameObject.SetActive(false);
             OnDeath?.Invoke(this.gameObject);
         }
 
@@ -32,11 +42,6 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("HitCoin");
             OnCoinPickup?.Invoke();
             Destroy(collision.gameObject);
-        }
-
-        if(collision.tag == "Trap")
-        {
-            OnDeath?.Invoke(this.gameObject);
         }
     }
 }

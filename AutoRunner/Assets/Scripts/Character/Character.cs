@@ -6,12 +6,27 @@ using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     private PlayerCollision _playerCollision;
-
-
+    private SpawnManager _spawnManager;
+    private Animator _animator; 
     void Start()
     {
+        _animator = GetComponent<Animator>();
+        _spawnManager = FindObjectOfType<SpawnManager>();
         _playerCollision = GetComponent<PlayerCollision>();
+
+        _spawnManager.OnRespawn += OnRespawn;
         _playerCollision.OnCoinPickup += CoinCollected;
+    }
+
+    private void OnDestroy()
+    {
+        _spawnManager.OnRespawn -= OnRespawn;
+        _playerCollision.OnCoinPickup -= CoinCollected;
+    }
+
+    private void OnRespawn()
+    {
+        _animator.SetBool("IsDead", false);
     }
 
     // Update is called once per frame
