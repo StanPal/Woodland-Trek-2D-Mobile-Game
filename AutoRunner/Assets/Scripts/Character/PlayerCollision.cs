@@ -43,5 +43,13 @@ public class PlayerCollision : MonoBehaviour
             OnCoinPickup?.Invoke();
             Destroy(collision.gameObject);
         }
+
+        if (collision.tag == "Trap")
+        {
+            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            this.GetComponent<Movement>().enabled = false;
+            _animator.SetBool("IsDead", true);
+            OnDeath?.Invoke(this.gameObject);
+        }
     }
 }
