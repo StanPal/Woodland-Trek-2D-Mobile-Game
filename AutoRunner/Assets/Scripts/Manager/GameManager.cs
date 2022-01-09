@@ -14,12 +14,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this; 
-        _timerManager = FindObjectOfType<TimerManager>();
+        Instance = this;
     }
 
     private void Start()
     {
+        _timerManager = FindObjectOfType<TimerManager>();
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             UpdateGameState(GameState.GameStart);
@@ -28,11 +28,6 @@ public class GameManager : MonoBehaviour
         {
             UpdateGameState(GameState.LevelStart);
         }
-    }
-
-    private void SaveTime(float time)
-    {
-        PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name, time);
     }
 
     public void UpdateGameState(GameState newState)
@@ -54,6 +49,11 @@ public class GameManager : MonoBehaviour
         }
 
         OnGameStateChanged?.Invoke(newState);
+    }
+
+    private void SaveTime(float time)
+    {
+        PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name, time);
     }
 
 }

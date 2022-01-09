@@ -62,7 +62,7 @@ public class TimerManager : MonoBehaviour
     private void OnRespawn()
     {
         GameManager.Instance.UpdateGameState(GameState.Respawn);
-        _currentTime = 0;
+        //_currentTime = 0;
         _isPlaying = true;
         GameManager.Instance.UpdateGameState(GameState.LevelStart);
     }
