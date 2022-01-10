@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
             case GameState.GoalReached:
                 _timerManager.OnGoalReached += SaveTime;
                 break;
+            case GameState.GameEnd:
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -64,5 +66,6 @@ public enum GameState
     GameStart,
     LevelStart,
     Respawn,
-    GoalReached
+    GoalReached,
+    GameEnd
 }
