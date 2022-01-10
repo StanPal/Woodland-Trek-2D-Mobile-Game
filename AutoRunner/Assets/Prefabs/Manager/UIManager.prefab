@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363840846424608177}
   - component: {fileID: 1363840846424608178}
+  - component: {fileID: 1363840848045975678}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -43,4 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434288d19635c7e49a4099c9fba38d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _winPanel: {fileID: 0}
   TimerText: {fileID: 0}
+  BestTime: {fileID: 0}
+--- !u!114 &1363840848045975678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363840846424608176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82bc0432cb1808408d4da544a0249a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
