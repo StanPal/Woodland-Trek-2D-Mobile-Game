@@ -39053,23 +39053,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1622943180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1363840846424608176, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
-  m_PrefabInstance: {fileID: 1363840848045975676}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1622943181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622943180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f82bc0432cb1808408d4da544a0249a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1709187845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39315,15 +39298,15 @@ PrefabInstance:
     - target: {fileID: 1079100847, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1622943181}
+      objectReference: {fileID: 0}
     - target: {fileID: 5971873181365964969, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1622943181}
+      objectReference: {fileID: 0}
     - target: {fileID: 5971873181506061382, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1622943181}
+      objectReference: {fileID: 0}
     - target: {fileID: 5971873182067827013, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_Pivot.x
       value: 0

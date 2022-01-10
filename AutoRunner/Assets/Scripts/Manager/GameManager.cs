@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
             case GameState.GameStart:
                 break;
             case GameState.LevelStart:
+                Time.timeScale = 1;
                 break;
             case GameState.Respawn:
                 break;

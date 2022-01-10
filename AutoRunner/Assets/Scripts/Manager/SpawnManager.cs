@@ -39,7 +39,7 @@ public class SpawnManager : MonoBehaviour
         }
         player.GetComponent<CapsuleCollider2D>().enabled = true;
         player.GetComponent<Rigidbody2D>().isKinematic = false;
-        player.GetComponent<Movement>().enabled = true;
+        player.GetComponent<PlayerController>().enabled = true;
         OnRespawn?.Invoke();
     }
 }

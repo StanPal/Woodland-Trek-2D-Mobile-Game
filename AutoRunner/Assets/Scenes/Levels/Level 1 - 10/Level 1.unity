@@ -38577,18 +38577,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1622943180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1363840846424608176, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
+--- !u!114 &1622943181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1622943181, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
   m_PrefabInstance: {fileID: 1363840848045975676}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1622943181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622943180}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f82bc0432cb1808408d4da544a0249a2, type: 3}
@@ -38784,6 +38778,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2544764853632970149, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5313311521020971900, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -38883,7 +38881,7 @@ PrefabInstance:
     - target: {fileID: 5377894116594226094, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7189052396448244568}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
 --- !u!1001 &5971873181599985470
@@ -38905,10 +38903,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1622943181}
-    - target: {fileID: 5971873181695576089, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 21
-      objectReference: {fileID: 0}
     - target: {fileID: 5971873182067827013, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -39067,6 +39061,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
+--- !u!114 &7189052396448244568 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7189052396422042238, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
+  m_PrefabInstance: {fileID: 7189052396448244567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3061822aa16114ca828fece026bfd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8275033028929820841
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class PlayerCollision : MonoBehaviour
         if(collision.collider.GetComponent<Trap>())
         {
             this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            this.GetComponent<Movement>().enabled = false;
+            this.GetComponent<PlayerController>().enabled = false;
             _animator.SetBool("IsDead",true);
             //gameObject.SetActive(false);
             OnDeath?.Invoke(this.gameObject);
@@ -47,7 +47,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.tag == "Trap")
         {
             this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            this.GetComponent<Movement>().enabled = false;
+            this.GetComponent<PlayerController>().enabled = false;
             _animator.SetBool("IsDead", true);
             OnDeath?.Invoke(this.gameObject);
         }
