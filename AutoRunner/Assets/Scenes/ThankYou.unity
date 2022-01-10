@@ -836,8 +836,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Thank You For Playing! \nMy Game is Still in Development be sure to tune
-    for updates. \nFor now Try to beat your time on the previous Levels :)"
+  m_Text: "Thank You For Playing! \nMy Game is Still in Development so be sure to
+    tune in for updates. \nFor now Try to beat your time on the previous Levels :)"
 --- !u!222 &1193557083
 CanvasRenderer:
   m_ObjectHideFlags: 0

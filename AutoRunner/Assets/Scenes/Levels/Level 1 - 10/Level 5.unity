@@ -133,7 +133,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7189052396422042238, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
   m_PrefabInstance: {fileID: 7189052396448244567}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7189052396448244568}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f3061822aa16114ca828fece026bfd2, type: 3}
@@ -38793,7 +38793,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cedbe765ddada14893fc67e3ad37fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Respawn: {fileID: 959938228}
+  RespawnPoint: {fileID: 0}
+  _transformSpeed: 1
 --- !u!1 &1388466934
 GameObject:
   m_ObjectHideFlags: 0
@@ -39125,7 +39126,7 @@ TilemapRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.96875, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -39804,6 +39805,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7189052396448244568}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5377894116456087777, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -40095,3 +40104,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
+--- !u!1 &7189052396448244568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7189052396422042227, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
+  m_PrefabInstance: {fileID: 7189052396448244567}
+  m_PrefabAsset: {fileID: 0}

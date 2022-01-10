@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour
     private float _moveX;
     private float _moveY;
     private float _groundRadius = 0.5f;
-    private float _jumpTime;    
+    private float _jumpTime;
+    private bool _onHoldJump;
 
     [Header("Horizontal PlayerController")]
     [SerializeField] private float _moveSpeed;
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         OnJump += Movment_OnJump;
-        OnHoldJump += Movment_OnHoldJump;
+        //OnHoldJump += Movment_OnHoldJump;
     }    
 
     private void Update()
@@ -82,7 +83,12 @@ public class PlayerController : MonoBehaviour
         else
         {
             _wallJumpTime += Time.deltaTime;
-        }        
+        }
+
+        if(_onHoldJump)
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
@@ -123,34 +129,44 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
     public void HoldJump()
     {
-        OnHoldJump?.Invoke();
+        _onHoldJump = true;
     }
 
-    private void Movment_OnHoldJump()
+    public void ReleaseHoldJump()
     {
-        if (IsGrounded())
-        {
-            _rb.velocity = Vector2.up * _jumpForce;
-            _animator.SetBool("IsJumping", true);
-        }
-        else if (OnWall() && !IsGrounded())
-        {
-            if (_moveX == 0)
-            {
-                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
-                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
-            }
-            else
-            {
-                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
-
-            }
-            _wallJumpTime = 0;
-        }
+        _onHoldJump = false;
     }
+    //public void HoldJump()
+    //{
+    //    OnHoldJump?.Invoke();
+    //}
+
+    //private void Movment_OnHoldJump()
+    //{
+    //    if (IsGrounded())
+    //    {
+    //        _rb.velocity = Vector2.up * _jumpForce;
+    //        _animator.SetBool("IsJumping", true);
+    //    }
+    //    else if (OnWall() && !IsGrounded())
+    //    {
+    //        if (_moveX == 0)
+    //        {
+    //            _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
+    //            transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+    //        }
+    //        else
+    //        {
+    //            _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
+
+    //        }
+    //        _wallJumpTime = 0;
+    //    }
+    //}
 
     public bool IsGrounded()
     {
