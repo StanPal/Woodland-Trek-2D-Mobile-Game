@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private event System.Action OnJump;
-    private event System.Action OnHoldJump;
 
     public LayerMask _groundLayer;
     public LayerMask _wallLayer;
@@ -14,8 +13,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _sprite;
     private Animator _animator; 
     private CapsuleCollider2D _capsuleCollider;
+    private PlayerCollision _playerCollision;
+    private SpawnManager _spawnManager; 
 
-    
     private bool _isGrounded;
     private float _moveX;
     private float _moveY;
@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private RaycastHit2D _wallCheckHit;
     private bool _isWallSliding;
+    private bool _isControllerDisabled; 
 
     private void Awake()
     {
@@ -44,13 +45,33 @@ public class PlayerController : MonoBehaviour
         _sprite = GetComponent<SpriteRenderer>();
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
+        _playerCollision = GetComponent<PlayerCollision>();
     }
 
     private void Start()
     {
+        _spawnManager = FindObjectOfType<SpawnManager>();
         OnJump += Movment_OnJump;
-        //OnHoldJump += Movment_OnHoldJump;
-    }    
+        _playerCollision.DisableControls += DisableControls;
+        _spawnManager.OnRespawn += OnRespawn;
+    }
+
+    private void OnRespawn()
+    {
+        _isControllerDisabled = false;
+    }
+
+    private void DisableControls()
+    {
+        _isControllerDisabled = true;
+    }
+
+    private void OnDestroy()
+    {
+       // _playerCollision.DisableControls -= DisableControls;
+       // _spawnManager.OnRespawn -= OnRespawn;
+
+    }
 
     private void Update()
     {
@@ -107,27 +128,27 @@ public class PlayerController : MonoBehaviour
 
     private void Movment_OnJump()
     {
-        if (IsGrounded())
-        {
-            _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
-            _animator.SetBool("IsJumping", true);
-            _animator.SetBool("IsGrounded", false);
-        }        
-        else if (OnWall() && !IsGrounded())
-        {
-            if(_moveX == 0)
+            if (IsGrounded())
             {
-                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
-                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
+                _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+                _animator.SetBool("IsJumping", true);
+                _animator.SetBool("IsGrounded", false);
             }
-            else
+            else if (OnWall() && !IsGrounded())
             {
-                _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
+                if (_moveX == 0)
+                {
+                    _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
+                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
-            }
-            _wallJumpTime = 0;
-        }
+                }
+                else
+                {
+                    _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
+
+                }
+                _wallJumpTime = 0;
+            }        
 
     }
 

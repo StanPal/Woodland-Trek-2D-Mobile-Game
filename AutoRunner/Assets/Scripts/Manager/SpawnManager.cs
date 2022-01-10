@@ -29,13 +29,14 @@ public class SpawnManager : MonoBehaviour
  
     private IEnumerator Respawn(GameObject player)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         while (Vector2.Distance(RespawnPoint.position, player.transform.position) > 0.1f)
         {
 
             player.transform.position = Vector2.MoveTowards(player.transform.position, RespawnPoint.transform.position, _transformSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
+        //yield return new WaitForSeconds(0.5f);
         player.GetComponent<CapsuleCollider2D>().enabled = true;
         player.GetComponent<Rigidbody2D>().isKinematic = false;
         player.GetComponent<PlayerController>().enabled = true;

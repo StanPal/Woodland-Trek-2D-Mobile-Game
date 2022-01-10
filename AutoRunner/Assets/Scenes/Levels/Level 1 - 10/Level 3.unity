@@ -1356,7 +1356,7 @@ GameObject:
   - component: {fileID: 1067153566}
   - component: {fileID: 1067153565}
   - component: {fileID: 1067153568}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: DeathZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39323,6 +39323,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2544764853632970149, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2544764853632970149, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

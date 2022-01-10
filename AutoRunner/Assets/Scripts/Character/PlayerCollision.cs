@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     public event System.Action<GameObject> OnDeath;
+    public event System.Action DisableControls; 
     public event System.Action OnCoinPickup;
-    private Animator _animator;    
+    private Animator _animator;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class PlayerCollision : MonoBehaviour
         {
             this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             this.GetComponent<PlayerController>().enabled = false;
+            DisableControls?.Invoke();
             _animator.SetBool("IsDead",true);
             //gameObject.SetActive(false);
             OnDeath?.Invoke(this.gameObject);
