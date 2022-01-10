@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public event System.Action OnRespawn;
-    public event System.Action OnDeath;
     public Transform RespawnPoint;
 
     [SerializeField] private float _transformSpeed = 1.0f; 

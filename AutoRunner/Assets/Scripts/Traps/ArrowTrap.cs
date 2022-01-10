@@ -18,10 +18,10 @@ public class ArrowTrap : MonoBehaviour
 
     private void Start()
     {
-        _spawnManager.OnDeath += OnDeath;
+        _spawnManager.OnRespawn += OnRespawn;
     }
 
-    private void OnDeath()
+    private void OnRespawn()
     {
         for(int i = 0; i < _arrows.Length; i++)
         {

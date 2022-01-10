@@ -5,7 +5,6 @@ using System;
 
 public class Pause : MonoBehaviour
 {
-    public static event Action OnGamePause; 
     public GameObject PausePanel;
     
     public void OnPause()
