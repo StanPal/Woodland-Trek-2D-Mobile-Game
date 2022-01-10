@@ -111,7 +111,8 @@ public class PlayerController : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
             _animator.SetBool("IsJumping", true);
-        }
+            _animator.SetBool("IsGrounded", false);
+        }        
         else if (OnWall() && !IsGrounded())
         {
             if(_moveX == 0)
@@ -139,37 +140,10 @@ public class PlayerController : MonoBehaviour
     {
         _onHoldJump = false;
     }
-    //public void HoldJump()
-    //{
-    //    OnHoldJump?.Invoke();
-    //}
-
-    //private void Movment_OnHoldJump()
-    //{
-    //    if (IsGrounded())
-    //    {
-    //        _rb.velocity = Vector2.up * _jumpForce;
-    //        _animator.SetBool("IsJumping", true);
-    //    }
-    //    else if (OnWall() && !IsGrounded())
-    //    {
-    //        if (_moveX == 0)
-    //        {
-    //            _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
-    //            transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
-    //        }
-    //        else
-    //        {
-    //            _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
-
-    //        }
-    //        _wallJumpTime = 0;
-    //    }
-    //}
 
     public bool IsGrounded()
     {
+        _animator.SetBool("IsGrounded",true);
         float extraHeight = 0.05f;
         Collider2D groundCheck = Physics2D.OverlapCircle(Feet.position, _groundRadius, _groundLayer);
         RaycastHit2D raycastHit = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeight, _groundLayer);
