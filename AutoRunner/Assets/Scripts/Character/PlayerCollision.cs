@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.GetComponent<Trap>())
+        if(collision.collider.GetComponent<Trap>() || collision.collider.tag == "Trap")
         {
             this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             this.GetComponent<PlayerController>().enabled = false;
@@ -46,12 +46,12 @@ public class PlayerCollision : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.tag == "Trap")
-        {
-            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            this.GetComponent<PlayerController>().enabled = false;
-            _animator.SetBool("IsDead", true);
-            OnDeath?.Invoke(this.gameObject);
-        }
+        //if (collision.tag == "Trap")
+        //{
+        //    this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        //    this.GetComponent<PlayerController>().enabled = false;
+        //    _animator.SetBool("IsDead", true);
+        //    OnDeath?.Invoke(this.gameObject);
+        //}
     }
 }
