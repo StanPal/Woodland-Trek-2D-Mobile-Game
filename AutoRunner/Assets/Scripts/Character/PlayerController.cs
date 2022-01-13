@@ -30,14 +30,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce;
 
     [Header("Wall Jump")]
-    [SerializeField] private float _wallJumpTime = 0.0f;
-    [SerializeField] private float _wallPushX = 0.0f;
-    [SerializeField] private float _wallPushY = 0.0f;
-
-
+    [SerializeField] private float _wallJumpTime = 0.2f;
+    [SerializeField] private float _wallSlideSpeed = 0.3f;
+    [SerializeField] private float _wallDistance = 0.5f;
+    
     private RaycastHit2D _wallCheckHit;
     private bool _isWallSliding;
-    private bool _isControllerDisabled; 
+    private bool _isControllerDisabled;
+    private bool _isFacingRight;
 
     private void Awake()
     {
@@ -66,12 +66,6 @@ public class PlayerController : MonoBehaviour
         _isControllerDisabled = true;
     }
 
-    private void OnDestroy()
-    {
-       // _playerCollision.DisableControls -= DisableControls;
-       // _spawnManager.OnRespawn -= OnRespawn;
-
-    }
 
     private void Update()
     {
@@ -83,33 +77,35 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("IsJumping", true);
         }
 
-        if (_wallJumpTime > 0.2f)
-        {
-            _rb.velocity = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
+      
 
-            if (OnWall() && !IsGrounded())
-            {
-                _rb.gravityScale = 0.5f;
-                _rb.velocity = Vector2.zero;
-            }
-            else
-            {
-                _rb.gravityScale = 1;
-            }
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
-        }
-        else
-        {
-            _wallJumpTime += Time.deltaTime;
-        }
+        //if (_wallJumpTime > 0.2f)
+        //{
+        //    _rb.velocity = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
 
-        if(_onHoldJump)
-        {
-            Jump();
-        }
+        //    if (OnWall() && !IsGrounded())
+        //    {
+        //        _rb.gravityScale = 0.5f;
+        //        _rb.velocity = Vector2.zero;
+        //    }
+        //    else
+        //    {
+        //        _rb.gravityScale = 1;
+        //    }
+        //    if (Input.GetButtonDown("Jump"))
+        //    {
+        //        Jump();
+        //    }
+        //}
+        //else
+        //{
+        //    _wallJumpTime += Time.deltaTime;
+        //}
+
+        //if(_onHoldJump)
+        //{
+        //    Jump();
+        //}
     }
 
     private void FixedUpdate()
@@ -118,7 +114,47 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
         _rb.velocity = movement; 
         _animator.SetFloat("Speed", Mathf.Abs(movement.x));
-                  
+        
+        if(IsGrounded())
+        {
+            _isGrounded = true;
+        }
+        else
+        {
+            _isGrounded = false;
+        }
+
+        #region  Wall Jump
+
+        if (_isFacingRight)
+        {
+            _wallCheckHit = Physics2D.Raycast(transform.position, new Vector2(_wallDistance, 0), _wallDistance, _wallLayer);
+            Debug.DrawRay(transform.position, new Vector3(_wallDistance, 0), Color.blue);
+        }
+        else
+        {
+            _wallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-_wallDistance, 0), _wallDistance, _wallLayer);
+        }
+
+        if (_wallCheckHit && !_isGrounded && _moveX != 0)
+        {
+            _isWallSliding = true;
+            _jumpTime = Time.time + _wallJumpTime;
+        }
+        else if (_jumpTime < Time.time)
+        {
+            _isWallSliding = false;
+        }
+
+        if (_isWallSliding)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -100, float.MaxValue));
+
+            //_rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -_wallSlideSpeed, float.MaxValue));
+        }
+
+        #endregion
+
     }
 
     public void Jump()
@@ -132,24 +168,7 @@ public class PlayerController : MonoBehaviour
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
                 _animator.SetBool("IsJumping", true);
-                _animator.SetBool("IsGrounded", false);
-            }
-            else if (OnWall() && !IsGrounded())
-            {
-                if (_moveX == 0)
-                {
-                    _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX * 10, 0);
-                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
-                }
-                else
-                {
-                    _rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * _wallPushX, _wallPushY);
-
-                }
-                _wallJumpTime = 0;
-            }        
-
+            }  
     }
 
     public void HoldJump()
@@ -191,11 +210,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool OnWall()
-    {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(_capsuleCollider.bounds.center, _capsuleCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, _wallLayer);
-        return raycastHit.collider != null;
-    }
+    //private bool OnWall()
+    //{
+    //    RaycastHit2D raycastHit = Physics2D.BoxCast(_capsuleCollider.bounds.center, _capsuleCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, _wallLayer);
+    //    return raycastHit.collider != null;
+    //}
 
     private void FlipCharacter()
     {
@@ -203,11 +222,13 @@ public class PlayerController : MonoBehaviour
         if (SimpleInput.GetAxis("Horizontal") < 0)
         {
             characterScale.x = -1;
+            _isFacingRight = false;
             
         }
         if (SimpleInput.GetAxis("Horizontal") > 0)
         {
             characterScale.x = 1;
+            _isFacingRight = true;
         }
 
         transform.localScale = characterScale;

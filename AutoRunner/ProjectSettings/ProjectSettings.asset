@@ -146,7 +146,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.AutoRunner
+    Android: com.Crownetic.AutoRunner
     iPhone: com.Crownetic.AutoRunner
   buildNumber:
     Standalone: 0
