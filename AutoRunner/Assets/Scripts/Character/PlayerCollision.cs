@@ -21,8 +21,7 @@ public class PlayerCollision : MonoBehaviour
             this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             this.GetComponent<PlayerController>().enabled = false;
             DisableControls?.Invoke();
-            _animator.SetBool("IsDead",true);
-            //gameObject.SetActive(false);
+            _animator.SetBool("IsDead",true);            
             OnDeath?.Invoke(this.gameObject);
         }
 
@@ -46,12 +45,13 @@ public class PlayerCollision : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        //if (collision.tag == "Trap")
-        //{
-        //    this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        //    this.GetComponent<PlayerController>().enabled = false;
-        //    _animator.SetBool("IsDead", true);
-        //    OnDeath?.Invoke(this.gameObject);
-        //}
+        if (collision.tag == "Trap")
+        {
+            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            this.GetComponent<PlayerController>().enabled = false;
+            DisableControls?.Invoke();
+            _animator.SetBool("IsDead", true);
+            OnDeath?.Invoke(this.gameObject);
+        }
     }
 }

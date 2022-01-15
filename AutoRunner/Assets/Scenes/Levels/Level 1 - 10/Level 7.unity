@@ -40973,6 +40973,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 705714787896642249, guid: 693b1f55e7e62874b8836783b194fa18, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.91
+      objectReference: {fileID: 0}
     - target: {fileID: 705714787968385637, guid: 693b1f55e7e62874b8836783b194fa18, type: 3}
       propertyPath: m_Name
       value: ArrowTrap
