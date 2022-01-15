@@ -13,7 +13,7 @@ public class TimerManager : MonoBehaviour
 
     public GameObject _winPanel;
     public TMP_Text TimerText;
-    public TMP_Text BestTime;
+    public Text BestTime;
     private Goal _goal;
     private bool _isNewBest; 
     private bool _isPlaying;
