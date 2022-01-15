@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+using TMPro.EditorUtilities;
 
 public class TimerManager : MonoBehaviour
 {
@@ -10,8 +12,8 @@ public class TimerManager : MonoBehaviour
     private SpawnManager _spawnManager;
 
     public GameObject _winPanel;
-    public Text TimerText;
-    public Text BestTime;
+    public TMP_Text TimerText;
+    public TMP_Text BestTime;
     private Goal _goal;
     private bool _isNewBest; 
     private bool _isPlaying;

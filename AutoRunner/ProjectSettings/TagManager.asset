@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovingPlatform
   - Trap
+  - PausePanel
   layers:
   - Default
   - TransparentFX
