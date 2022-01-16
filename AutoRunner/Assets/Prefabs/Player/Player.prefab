@@ -112,6 +112,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3123202408813612166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8000446303323618820}
+  m_Layer: 0
+  m_Name: FrontCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8000446303323618820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3123202408813612166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7189052396422042225}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7189052396422042227
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +179,7 @@ Transform:
   m_Children:
   - {fileID: 1237357527}
   - {fileID: 1279079436}
+  - {fileID: 8000446303323618820}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,15 +305,21 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
   Feet: {fileID: 1237357527}
   _moveSpeed: 10
+  _airMoveSpeed: 20
   _jumpForce: 10
-  _wallJumpTime: 0
-  _wallPushX: 0
-  _wallPushY: 0
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _wallJumpDirection: 0
+  _wallJumpAngle: {x: 1, y: 3}
+  _wallJumpForce: 15
+  _wallDistance: 0.8
+  _wallSlideSpeed: -1
+  _wallDirection: 0
+  _wallJumpX: 20
+  _wallJumpY: 7
 --- !u!114 &7189052396422042236
 MonoBehaviour:
   m_ObjectHideFlags: 0
