@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public GameState State;
     public static event Action<GameState> OnGameStateChanged; 
+    public GameState State;
+    public GameObject player;
 
     private TimerManager _timerManager;
 

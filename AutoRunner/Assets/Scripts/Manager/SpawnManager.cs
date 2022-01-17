@@ -13,11 +13,20 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         _playerCollision = FindObjectOfType<PlayerCollision>();
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameState state)
+    {
+        if(state == GameState.LevelStart)
+        {
+            Instantiate(GameManager.Instance.player, RespawnPoint);
+        }
     }
 
     void Start()
     {
-        _playerCollision.OnDeath += _playerCollision_OnDeath;
+        //_playerCollision.OnDeath += _playerCollision_OnDeath;
     }
 
     private void _playerCollision_OnDeath(GameObject player)
