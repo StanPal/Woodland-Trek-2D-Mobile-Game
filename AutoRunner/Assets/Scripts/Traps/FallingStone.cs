@@ -7,7 +7,8 @@ public class FallingStone : MonoBehaviour
     [SerializeField] private float _rayLength;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _gravity;
-    [SerializeField] private float _blinkTimer; 
+    [SerializeField] private float _blinkTimer;
+    [SerializeField] private float _returnSpeed;
 
     private Animator _animator; 
     private Rigidbody2D _rb;
@@ -51,7 +52,7 @@ public class FallingStone : MonoBehaviour
       _rb.bodyType = RigidbodyType2D.Static;
         while (Vector2.Distance(transform.position, _startPos.position) > 0.1f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _startPos.position, 1.0f * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _startPos.position, _returnSpeed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
       _isMovingBack = false;
@@ -83,8 +84,19 @@ public class FallingStone : MonoBehaviour
             if (collision.gameObject.GetComponent<Character>())
             {
                 _rb.isKinematic = false;
-                _rb.gravityScale = _gravity;
+                //_rb.gravityScale = _gravity;
                 Debug.Log("Player Entered");
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(!_isMovingBack)
+        {
+            if(collision.gameObject.GetComponent<Character>())
+            {
+                collision.gameObject.GetComponent<PlayerCollision>().InvokeOnDeath();
             }
         }
     }

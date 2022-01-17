@@ -18,12 +18,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if(collision.collider.GetComponent<Trap>() || collision.collider.tag == "Trap")
         {
-            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            this.GetComponent<PlayerController>().enabled = false;
-            DisableControls?.Invoke();
-            _animator.SetBool("IsDead",true);
-            //gameObject.SetActive(false);
-            OnDeath?.Invoke(this.gameObject);
+            InvokeOnDeath();
         }
 
         if(collision.collider.tag == "MovingPlatform")
@@ -53,5 +48,15 @@ public class PlayerCollision : MonoBehaviour
         //    _animator.SetBool("IsDead", true);
         //    OnDeath?.Invoke(this.gameObject);
         //}
+    }
+
+    public void InvokeOnDeath()
+    {
+        this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        this.GetComponent<PlayerController>().enabled = false;
+        DisableControls?.Invoke();
+        _animator.SetBool("IsDead", true);
+        //gameObject.SetActive(false);
+        OnDeath?.Invoke(this.gameObject);
     }
 }
