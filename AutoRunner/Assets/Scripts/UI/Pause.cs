@@ -25,6 +25,18 @@ public class Pause : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void PreviousLevel()
+    {
+        GameManager.Instance.UpdateGameState(GameState.LevelStart);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void ReplayLevel()
+    {
+        GameManager.Instance.UpdateGameState(GameState.LevelStart);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void GoBackToMain()
     {
         Time.timeScale = 1;
