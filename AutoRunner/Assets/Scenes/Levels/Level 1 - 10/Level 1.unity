@@ -38967,6 +38967,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControllerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5377894116594226093, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -114
+      objectReference: {fileID: 0}
     - target: {fileID: 5377894116594226094, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
