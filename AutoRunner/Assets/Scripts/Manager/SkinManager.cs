@@ -5,9 +5,12 @@ using UnityEngine.UI;
 public class SkinManager : MonoBehaviour
 {
     [SerializeField] private GameObject _characterSelectPanel;
-    [SerializeField] private GameObject _mainMenuPanel;    
+    [SerializeField] private GameObject _mainMenuPanel;
     [SerializeField] private SpriteRenderer _sr;
     [SerializeField] private List<Sprite> skins = new List<Sprite>();
+
+    public AnimatorOverrideController[] _animOverrideList;
+    
     private int _selectedSkin = 0;
     public GameObject PlayerSkin;
     public GameObject Player;
@@ -15,6 +18,7 @@ public class SkinManager : MonoBehaviour
     private void Start()
     {
         Player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
+        Player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[0] as RuntimeAnimatorController;
 
     }
 
@@ -42,7 +46,7 @@ public class SkinManager : MonoBehaviour
 
         _sr.sprite = skins[_selectedSkin];
 
-        UpdateSprite();
+        UpdateSprite(_selectedSkin);
     }
 
     public void PreviousOption()
@@ -54,11 +58,12 @@ public class SkinManager : MonoBehaviour
         }
 
         _sr.sprite = skins[_selectedSkin];
-        UpdateSprite();
+        UpdateSprite(_selectedSkin);
     }
 
-    private void UpdateSprite()
+    private void UpdateSprite(int index)
     {
         Player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
+        Player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
     }
 }
