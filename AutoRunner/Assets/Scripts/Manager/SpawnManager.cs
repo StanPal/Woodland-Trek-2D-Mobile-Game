@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        //_playerCollision.OnDeath += _playerCollision_OnDeath;
+        _playerCollision.OnDeath += _playerCollision_OnDeath;
     }
 
     private void _playerCollision_OnDeath(GameObject player)
@@ -45,7 +45,6 @@ public class SpawnManager : MonoBehaviour
             player.transform.position = Vector2.MoveTowards(player.transform.position, RespawnPoint.transform.position, _transformSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
-        //yield return new WaitForSeconds(0.5f);
         player.GetComponent<CapsuleCollider2D>().enabled = true;
         player.GetComponent<Rigidbody2D>().isKinematic = false;
         player.GetComponent<PlayerController>().enabled = true;

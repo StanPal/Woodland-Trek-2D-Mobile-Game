@@ -5,12 +5,18 @@ using UnityEngine.UI;
 public class SkinManager : MonoBehaviour
 {
     [SerializeField] private GameObject _characterSelectPanel;
-    [SerializeField] private GameObject _mainMenuPanel;
+    [SerializeField] private GameObject _mainMenuPanel;    
     [SerializeField] private SpriteRenderer _sr;
     [SerializeField] private List<Sprite> skins = new List<Sprite>();
     private int _selectedSkin = 0;
     public GameObject PlayerSkin;
     public GameObject Player;
+
+    private void Start()
+    {
+        Player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
+
+    }
 
     public void TogglePanel()
     {
