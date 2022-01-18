@@ -306,9 +306,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Feet: {fileID: 1237357527}
+  _holdTime: 0
+  _isHoldJump: 0
   _moveSpeed: 10
   _airMoveSpeed: 20
   _jumpForce: 10
+  _originalJumpForce: 10
+  _jumpMultiplier: 1.2
+  _jumpChargeSpeed: 1
   _wallLayer:
     serializedVersion: 2
     m_Bits: 1024

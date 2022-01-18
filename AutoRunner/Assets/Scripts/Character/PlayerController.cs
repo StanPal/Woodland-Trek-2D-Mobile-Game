@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private event System.Action OnJump;
+    private event System.Action OnHoldJump;
+    private event System.Action OnReleaseJump;
 
     public LayerMask _groundLayer;
     public Transform Feet;
@@ -13,12 +16,13 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D _capsuleCollider;
     private PlayerCollision _playerCollision;
     private SpawnManager _spawnManager;
-
+    private Color _originalSpriteColor;
 
     private bool _isGrounded;
     private float _moveX;
     private float _groundRadius = 0.5f;
-    private bool _onHoldJump;
+    [SerializeField] private float _holdTime; 
+    [SerializeField] private bool _isHoldJump;
     private bool _isFacingRight;
     private bool _isControllerDisabled;
 
@@ -28,6 +32,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("For Jumping")]
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _originalJumpForce;
+    [SerializeField] private float _jumpMultiplier;
+    [SerializeField] private float _jumpChargeSpeed; 
+    
 
     [Header("Wall Jump")]
     [SerializeField] private LayerMask _wallLayer;
@@ -53,11 +61,14 @@ public class PlayerController : MonoBehaviour
     {
         _spawnManager = FindObjectOfType<SpawnManager>();
 
+        _originalSpriteColor = _sprite.color;
         _wallJumpAngle.Normalize();
 
-        OnJump += Movment_OnJump;
         _playerCollision.DisableControls += DisableControls;
         _spawnManager.OnRespawn += OnRespawn;
+        OnJump += Movment_OnJump;
+        OnHoldJump += HoldJump;
+        OnReleaseJump += ReleaseHoldJump;
     }
 
     private void OnRespawn()
@@ -104,18 +115,31 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Jump()
-    {
+    {        
         OnJump?.Invoke();
+    }
+
+    public void HoldJumpPress()
+    {
+        OnHoldJump?.Invoke();
+    }
+
+    public void ReleaseHoldJumpPress()
+    {
+        OnReleaseJump?.Invoke();
     }
 
     private void Movment_OnJump()
     {
+        Debug.Log("IsClickJump");
+
         if (!_isControllerDisabled)
         {
-            if (IsGrounded())
+            if (IsGrounded() && !_isHoldJump)
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
                 _animator.SetTrigger("JumpTrigger");
+                StopCoroutine(HoldingJump());
             }
             else if ((_isWallSliding || _wallCheckHit))
             {
@@ -124,14 +148,68 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void HoldJump()
-    {
-        _onHoldJump = true;
+    private void HoldJump()
+    {         
+        if (IsGrounded())
+        {
+            _isHoldJump = true;
+        }
+        if(_isHoldJump)
+        {
+            _jumpForce = _originalJumpForce;
+            StartCoroutine(StartHoldTime());
+        }
     }
 
-    public void ReleaseHoldJump()
+    private void ReleaseHoldJump()
     {
-        _onHoldJump = false;
+        _isHoldJump = false;
+        _holdTime = 0;
+        StopCoroutine(HoldingJump());
+    }
+    
+    private IEnumerator StartHoldTime()
+    {
+        _holdTime = 0;
+        while(_holdTime < 2.0f)
+        {
+            _holdTime += 1.0f;
+            yield return new WaitForSeconds(1.0f);
+        }
+        StartCoroutine(HoldingJump());
+        StartCoroutine(FlashingSprite());
+    }
+
+    private IEnumerator HoldingJump()
+    {
+        while (_isHoldJump)
+        {
+            if (_jumpForce >= _originalJumpForce * _jumpMultiplier)
+            {
+                _jumpForce = _originalJumpForce * _jumpMultiplier;
+            }
+            _jumpForce += _jumpChargeSpeed;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    private IEnumerator FlashingSprite()
+    {
+        while (_isHoldJump)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                SetSpriteColor(Color.yellow);
+                yield return new WaitForSeconds(0.1f);
+                SetSpriteColor(_originalSpriteColor);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+    }
+
+    private void SetSpriteColor(Color spriteColor)
+    {
+        _sprite.color = spriteColor;
     }
 
     private void Movement()

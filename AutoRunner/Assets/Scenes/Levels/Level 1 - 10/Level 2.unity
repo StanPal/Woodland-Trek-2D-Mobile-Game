@@ -39292,6 +39292,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 27259177}
@@ -39300,12 +39308,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 27259177}
     - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 27259177}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HoldJump
+      value: HoldJumpPress
       objectReference: {fileID: 0}
     - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReleaseHoldJump
+      value: ReleaseHoldJumpPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5377894116456087777, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_Pivot.x

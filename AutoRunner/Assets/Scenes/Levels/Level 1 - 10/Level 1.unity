@@ -38868,10 +38868,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2544764853632970149, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2544764853632970149, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1021870427}
@@ -38889,6 +38885,10 @@ PrefabInstance:
       objectReference: {fileID: 7189052396448244568}
     - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7189052396448244568}
+    - target: {fileID: 5377894116403535194, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7189052396448244568}
     - target: {fileID: 5377894116456087777, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
@@ -38979,18 +38979,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControllerCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5377894116456087789, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5377894116594226093, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -114
-      objectReference: {fileID: 0}
-    - target: {fileID: 5377894116594226094, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7189052396448244568}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
 --- !u!1 &5377894116403535193 stripped
@@ -39225,10 +39213,6 @@ PrefabInstance:
     - target: {fileID: 7189052396422042227, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189052396422042237, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
