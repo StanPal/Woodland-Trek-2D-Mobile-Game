@@ -956,6 +956,14 @@ PrefabInstance:
       propertyPath: PausePanel
       value: 
       objectReference: {fileID: 1227617096}
+    - target: {fileID: 1181713953624608860, guid: 622cd4d7bc89d084ebdfe3be90c23a5e, type: 3}
+      propertyPath: ControllerCanvas
+      value: 
+      objectReference: {fileID: 5377894116403535193}
+    - target: {fileID: 1181713953624608860, guid: 622cd4d7bc89d084ebdfe3be90c23a5e, type: 3}
+      propertyPath: BlackScreenOverlay
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1181713953624608861, guid: 622cd4d7bc89d084ebdfe3be90c23a5e, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -38778,6 +38786,10 @@ PrefabInstance:
       propertyPath: _winPanel
       value: 
       objectReference: {fileID: 770608175}
+    - target: {fileID: 1363840846424608178, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
+      propertyPath: _controllerCanvas
+      value: 
+      objectReference: {fileID: 5377894116403535193}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
 --- !u!114 &1363840848045975677 stripped
@@ -38967,6 +38979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControllerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5377894116456087789, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5377894116594226093, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -114
@@ -38977,6 +38993,11 @@ PrefabInstance:
       objectReference: {fileID: 7189052396448244568}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+--- !u!1 &5377894116403535193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5377894116456087789, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+  m_PrefabInstance: {fileID: 5377894116403535192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5971873181599985470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38988,38 +39009,58 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1363840848045975677}
-    - target: {fileID: 1079100847, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMain
-      objectReference: {fileID: 0}
     - target: {fileID: 1992200918, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
-      propertyPath: m_TagString
-      value: PausePanel
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992200919, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992200919, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992200919, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992200919, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992200919, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992200919, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079626875052806676, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4524813518553289593, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1021870427}
-    - target: {fileID: 4524813518553289593, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnResume
+    - target: {fileID: 5858462282815298501, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_Name
+      value: BlackScreen_Overlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858462282815298501, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5971873181365964969, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1363840848045975677}
-    - target: {fileID: 5971873181365964969, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReplayLevel
-      objectReference: {fileID: 0}
     - target: {fileID: 5971873181506061382, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1363840848045975677}
-    - target: {fileID: 5971873181506061382, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToNextLevel
-      objectReference: {fileID: 0}
     - target: {fileID: 5971873182067827013, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -39108,7 +39149,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1992200920, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
 --- !u!114 &5971873181599985471 stripped
 MonoBehaviour:

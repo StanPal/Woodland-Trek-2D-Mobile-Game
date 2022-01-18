@@ -1321,6 +1321,10 @@ PrefabInstance:
       propertyPath: PausePanel
       value: 
       objectReference: {fileID: 5971873181599985472}
+    - target: {fileID: 1181713953624608860, guid: 622cd4d7bc89d084ebdfe3be90c23a5e, type: 3}
+      propertyPath: ControllerCanvas
+      value: 
+      objectReference: {fileID: 1758531345}
     - target: {fileID: 1181713953624608861, guid: 622cd4d7bc89d084ebdfe3be90c23a5e, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -39171,6 +39175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0e83edad1bac5947ba18360778e487f, type: 3}
+--- !u!1 &1758531345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5377894116456087789, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+  m_PrefabInstance: {fileID: 5377894116403535192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1363840848045975676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39238,6 +39247,10 @@ PrefabInstance:
       propertyPath: _winPanel
       value: 
       objectReference: {fileID: 770608175}
+    - target: {fileID: 1363840846424608178, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
+      propertyPath: _controllerCanvas
+      value: 
+      objectReference: {fileID: 1758531345}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
 --- !u!114 &1363840848045975677 stripped

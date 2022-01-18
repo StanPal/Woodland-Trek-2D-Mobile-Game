@@ -12,6 +12,7 @@ public class TimerManager : MonoBehaviour
     private SpawnManager _spawnManager;
 
     public GameObject _winPanel;
+    public GameObject _controllerCanvas; 
     public TMP_Text TimerText;
     public TMP_Text BestTime;
     private Goal _goal;
@@ -54,6 +55,7 @@ public class TimerManager : MonoBehaviour
         {
             Time.timeScale = 0;
             _winPanel.SetActive(true);
+            _controllerCanvas.SetActive(false);
         }
         else
         {

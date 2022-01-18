@@ -6,10 +6,12 @@ using System;
 public class Pause : MonoBehaviour
 {
     public GameObject PausePanel;
-    
+    public GameObject ControllerCanvas;
+
     public void OnPause()
     {
         Time.timeScale = 0;
+        ControllerCanvas.SetActive(false);
         PausePanel.SetActive(true);
     }
 
@@ -17,6 +19,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 1;
         PausePanel.SetActive(false);
+        ControllerCanvas.SetActive(true);
     }
 
     public void NextLevel()

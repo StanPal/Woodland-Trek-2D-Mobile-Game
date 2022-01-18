@@ -7,7 +7,9 @@ public class SkinManager : MonoBehaviour
     [SerializeField] private GameObject _characterSelectPanel;
     [SerializeField] private GameObject _mainMenuPanel;
     [SerializeField] private SpriteRenderer _sr;
+    [SerializeField] private Image Image; 
     [SerializeField] private List<Sprite> skins = new List<Sprite>();
+    [SerializeField] private List<Image> ImageList = new List<Image>();
 
     public AnimatorOverrideController[] _animOverrideList;
     
@@ -19,7 +21,6 @@ public class SkinManager : MonoBehaviour
     {
         Player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
         Player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[0] as RuntimeAnimatorController;
-
     }
 
     public void TogglePanel()
@@ -45,7 +46,7 @@ public class SkinManager : MonoBehaviour
         }
 
         _sr.sprite = skins[_selectedSkin];
-
+        Image.sprite = skins[_selectedSkin];
         UpdateSprite(_selectedSkin);
     }
 
@@ -58,6 +59,7 @@ public class SkinManager : MonoBehaviour
         }
 
         _sr.sprite = skins[_selectedSkin];
+        Image.sprite = skins[_selectedSkin];
         UpdateSprite(_selectedSkin);
     }
 
@@ -65,5 +67,6 @@ public class SkinManager : MonoBehaviour
     {
         Player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
         Player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
+        PlayerSkin.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
     }
 }
