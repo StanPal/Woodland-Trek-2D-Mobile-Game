@@ -9,18 +9,19 @@ public class SkinManager : MonoBehaviour
     [SerializeField] private SpriteRenderer _sr;
     [SerializeField] private Image Image; 
     [SerializeField] private List<Sprite> skins = new List<Sprite>();
-    [SerializeField] private List<Image> ImageList = new List<Image>();
 
     public AnimatorOverrideController[] _animOverrideList;
     
-    private int _selectedSkin = 0;
+    private static int _selectedSkin = 0;
     public GameObject PlayerSkin;
-    public GameObject Player;
 
     private void Start()
     {
-        Player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
-        Player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[0] as RuntimeAnimatorController;
+        GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
+        GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[_selectedSkin] as RuntimeAnimatorController;
+        PlayerSkin.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite;
+        PlayerSkin.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[_selectedSkin] as RuntimeAnimatorController;
+        Image.sprite = skins[_selectedSkin];
     }
 
     public void TogglePanel()
@@ -65,8 +66,8 @@ public class SkinManager : MonoBehaviour
 
     private void UpdateSprite(int index)
     {
-        Player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
-        Player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
+        GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
+        GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
         PlayerSkin.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
     }
 }
