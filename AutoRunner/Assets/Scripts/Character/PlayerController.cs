@@ -109,15 +109,18 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Movment_OnJump()
-    {        
-        if (IsGrounded())
+    {
+        if (!_isControllerDisabled)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
-            _animator.SetTrigger("JumpTrigger");
-        }
-        else if ((_isWallSliding || _wallCheckHit))
-        {
-            WallJump();
+            if (IsGrounded())
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+                _animator.SetTrigger("JumpTrigger");
+            }
+            else if ((_isWallSliding || _wallCheckHit))
+            {
+                WallJump();
+            }
         }
     }
 

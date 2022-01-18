@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class LevelLoader : MonoBehaviour
 {
+    public Animator transition;
+    [SerializeField] private float _transitionTime = 1.0f;
     public void ReplayLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -12,13 +15,11 @@ public class UIManager : MonoBehaviour
     public void GoToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Reset();
     }
 
     public void GoToLevel()
     {
-        SceneManager.LoadScene("Level 1");
-        Reset();
+       StartCoroutine(LoadLevel(1));
     }
 
     public void GoToMain()
@@ -35,5 +36,15 @@ public class UIManager : MonoBehaviour
     private void Reset()
     {
         Time.timeScale = 1;
+    }
+
+    private IEnumerator LoadLevel(int levelIndex)
+    {
+        transition.SetTrigger("StartTrigger");
+
+        yield return new WaitForSeconds(_transitionTime);
+        SceneManager.LoadScene(levelIndex);
+        Reset();
+
     }
 }
