@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using TMPro.EditorUtilities;
 
 public class TimerManager : MonoBehaviour
 {
