@@ -597,10 +597,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2400, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -909,6 +909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82bc0432cb1808408d4da544a0249a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transition: {fileID: 0}
+  _transitionTime: 1
 --- !u!1 &1750461266 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8633260090520904128, guid: 20951fb97d02caf46a400ec1bd56eaee, type: 3}
@@ -1061,6 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 4
+  player: {fileID: 0}
 --- !u!4 &1834123053
 Transform:
   m_ObjectHideFlags: 0

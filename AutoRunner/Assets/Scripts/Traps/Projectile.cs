@@ -19,11 +19,11 @@ public class Projectile : MonoBehaviour
         float movementSpeed = _speed * Time.deltaTime;
         transform.Translate(movementSpeed, 0, 0);
 
-        _lifeTime += Time.deltaTime;
-        if(_lifeTime > _resetTime)
-        {
-            gameObject.SetActive(false);
-        }
+        //_lifeTime += Time.deltaTime;
+        //if(_lifeTime > _resetTime)
+        //{
+        //    gameObject.SetActive(false);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,7 +31,11 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.GetComponent<PlayerCollision>())
         {
             collision.gameObject.GetComponent<PlayerCollision>().InvokeOnDeath();
+            gameObject.SetActive(false);
+        } 
+        if(collision.tag.Equals("Wall"))
+        {
+            gameObject.SetActive(false);
         }
-        gameObject.SetActive(false);
     }
 }
