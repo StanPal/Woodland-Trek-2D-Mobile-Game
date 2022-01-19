@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
         _wallJumpAngle.Normalize();
 
         _playerCollision.DisableControls += DisableControls;
+
         _spawnManager.OnRespawn += OnRespawn;
         OnJump += Movment_OnJump;
         OnHoldJump += HoldJump;
@@ -83,14 +84,17 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _moveX = SimpleInput.GetAxis("Horizontal");
-        if (IsGrounded() && Input.GetButtonDown("Jump"))
+        if (GameManager.Instance.State == GameState.Playable)
         {
-            Jump();
-        }
-        if ((_isWallSliding || _wallCheckHit) && Input.GetButtonDown("Jump"))
-        {
-            WallJump();
+            _moveX = SimpleInput.GetAxis("Horizontal");
+            if (IsGrounded() && Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
+            if ((_isWallSliding || _wallCheckHit) && Input.GetButtonDown("Jump"))
+            {
+                WallJump();
+            }
         }
     }
 
@@ -115,7 +119,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Jump()
-    {        
+    {   
         OnJump?.Invoke();
     }
 
@@ -126,24 +130,25 @@ public class PlayerController : MonoBehaviour
 
     public void ReleaseHoldJumpPress()
     {
-        OnReleaseJump?.Invoke();
+            OnReleaseJump?.Invoke();
     }
 
     private void Movment_OnJump()
     {
-        Debug.Log("IsClickJump");
-
-        if (!_isControllerDisabled)
+        if (GameManager.Instance.State == GameState.Playable)
         {
-            if (IsGrounded() && !_isHoldJump)
+            if (!_isControllerDisabled)
             {
-                _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
-                _animator.SetTrigger("JumpTrigger");
-                StopCoroutine(HoldingJump());
-            }
-            else if ((_isWallSliding || _wallCheckHit))
-            {
-                WallJump();
+                if (IsGrounded() && !_isHoldJump)
+                {
+                    _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+                    _animator.SetTrigger("JumpTrigger");
+                    StopCoroutine(HoldingJump());
+                }
+                else if ((_isWallSliding || _wallCheckHit))
+                {
+                    WallJump();
+                }
             }
         }
     }

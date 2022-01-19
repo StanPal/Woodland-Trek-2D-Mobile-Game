@@ -39674,7 +39674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1363840846424608177, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1363840846424608177, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39728,6 +39728,10 @@ PrefabInstance:
       propertyPath: _winPanel
       value: 
       objectReference: {fileID: 770608175}
+    - target: {fileID: 1363840846424608178, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
+      propertyPath: CountDownText
+      value: 
+      objectReference: {fileID: 5971873181599985473}
     - target: {fileID: 1363840846424608178, guid: 568e8de4af44d6e47925991924ca3eef, type: 3}
       propertyPath: _controllerCanvas
       value: 
@@ -39949,7 +39953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5971873182067827013, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5971873182067827013, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_AnchorMax.x
@@ -40043,6 +40047,17 @@ MonoBehaviour:
 --- !u!114 &5971873181599985472 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8824318164496126173, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+  m_PrefabInstance: {fileID: 5971873181599985470}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5971873181599985473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4242716805537404330, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
   m_PrefabInstance: {fileID: 5971873181599985470}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

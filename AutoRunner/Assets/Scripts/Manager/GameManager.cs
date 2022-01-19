@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged; 
     public GameState State;
     public GameObject player;
+    static private bool _replayLevel; 
+    public bool OnReplayLevel { get => _replayLevel; set => _replayLevel = value; }
 
     private TimerManager _timerManager;
 
@@ -24,6 +26,11 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             UpdateGameState(GameState.GameStart);
+        }
+        else if( _replayLevel)
+        {
+            Debug.Log(true);
+            UpdateGameState(GameState.LevelRestart);
         }
         else
         {
@@ -40,6 +47,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.LevelStart:
                 Time.timeScale = 1;
+                break;
+            case GameState.LevelRestart:
+                break;
+            case GameState.Playable:
                 break;
             case GameState.Respawn:
                 break;
@@ -66,6 +77,8 @@ public enum GameState
 {
     GameStart,
     LevelStart,
+    LevelRestart,
+    Playable,
     Respawn,
     GoalReached,
     GameEnd

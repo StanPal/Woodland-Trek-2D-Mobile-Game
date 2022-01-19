@@ -6,20 +6,23 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     [SerializeField] private float _transitionTime = 1.0f;
+
     public void ReplayLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.OnReplayLevel = true; 
         Reset();
     }
    
     public void GoToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.Instance.OnReplayLevel = false;
     }
 
     public void GoToLevel()
     {
-       StartCoroutine(LoadLevel(1));
+        StartCoroutine(LoadLevel(1));
     }
 
     public void GoToMain()

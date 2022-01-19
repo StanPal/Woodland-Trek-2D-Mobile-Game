@@ -24,25 +24,35 @@ public class Pause : MonoBehaviour
 
     public void NextLevel()
     {
-        GameManager.Instance.UpdateGameState(GameState.LevelStart);
+        GameManager.Instance.OnReplayLevel = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Reset();
     }
 
     public void PreviousLevel()
     {
-        GameManager.Instance.UpdateGameState(GameState.LevelStart);
+        GameManager.Instance.OnReplayLevel = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Reset();
+
     }
 
     public void ReplayLevel()
     {
-        GameManager.Instance.UpdateGameState(GameState.LevelStart);
+        GameManager.Instance.OnReplayLevel = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Reset();
+
     }
 
     public void GoBackToMain()
     {
-        Time.timeScale = 1;
+        Reset();
         SceneManager.LoadScene(0);
+    }
+
+    private void Reset()
+    {
+        Time.timeScale = 1;
     }
 }

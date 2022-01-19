@@ -3,17 +3,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class TimerManager : MonoBehaviour
 {
     public event System.Action OnTimerStopped;
     public event System.Action<float> OnGoalReached;
-    private SpawnManager _spawnManager;
 
+    private SpawnManager _spawnManager;
     public GameObject _winPanel;
     public GameObject _controllerCanvas; 
-    public TMP_Text TimerText;
-    public TMP_Text BestTime;
+    [SerializeField] private TMP_Text TimerText;
+    [SerializeField] private TMP_Text BestTime;
+    [SerializeField] private TMP_Text CountDownText;
     private Goal _goal;
     private bool _isNewBest; 
     private bool _isPlaying;
@@ -35,17 +37,60 @@ public class TimerManager : MonoBehaviour
 
     private void GameManagerOnGameStateChanged(GameState state)
     {
-      
+      if(state == GameState.LevelRestart)
+        {
+            CountDownText.enabled = false;
+            StartCoroutine(RestartDelay());
+        }
+      else if (state == GameState.LevelStart)
+        {            
+            StartCoroutine(StartCountDown());
+        }
     }
 
     private void Start()
-    {
+    {  
         _isNewBest = false;
-        _isPlaying = true;
         _goal.OnReachedGoal += OnReachedGoal;
         _spawnManager.OnRespawn += OnRespawn;
         OnTimerStopped += ToggleWinPanel;
         Debug.Log(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name));
+    }
+
+
+    void Update()
+    {
+        if (_isPlaying)
+        {
+            _currentTime += Time.deltaTime;
+            int minutes = Mathf.FloorToInt(_currentTime / 60f);
+            int seconds = Mathf.FloorToInt(_currentTime % 60f);
+            int milliseconds = Mathf.FloorToInt((_currentTime * 100f) % 100f);
+            TimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
+        }
+    }
+
+    private IEnumerator RestartDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.State = GameState.Playable;
+        _isPlaying = true;
+    }
+
+    private IEnumerator StartCountDown()
+    {
+        CountDownText.text = "3";
+        yield return new WaitForSeconds(0.7f);
+        CountDownText.text = "2";
+        yield return new WaitForSeconds(0.7f);
+        CountDownText.text = "1";
+        yield return new WaitForSeconds(0.7f);
+        CountDownText.text = "GO!";
+        yield return new WaitForSeconds(0.3f);
+        GameManager.Instance.State = GameState.Playable;
+        CountDownText.enabled = false;
+        _isPlaying = true;
+        
     }
 
     private void ToggleWinPanel()
@@ -67,7 +112,7 @@ public class TimerManager : MonoBehaviour
         GameManager.Instance.UpdateGameState(GameState.Respawn);
         //_currentTime = 0;
         _isPlaying = true;
-        GameManager.Instance.UpdateGameState(GameState.LevelStart);
+        GameManager.Instance.UpdateGameState(GameState.Playable);
     }
 
     private void OnReachedGoal()
@@ -101,17 +146,6 @@ public class TimerManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (_isPlaying)
-        {
-            _currentTime += Time.deltaTime;
-            int minutes = Mathf.FloorToInt(_currentTime / 60f);
-            int seconds = Mathf.FloorToInt(_currentTime % 60f);
-            int milliseconds = Mathf.FloorToInt((_currentTime * 100f) % 100f);
-            TimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
-        }
-    }
 
 
 }
