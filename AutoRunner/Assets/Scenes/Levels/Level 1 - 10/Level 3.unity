@@ -38891,6 +38891,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 720626471178323876, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 27259174}
     - target: {fileID: 8275033028857652107, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -38901,11 +38905,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8275033028857652108, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.92
+      value: -10.94
       objectReference: {fileID: 0}
     - target: {fileID: 8275033028857652108, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.66
+      value: -2.44
       objectReference: {fileID: 0}
     - target: {fileID: 8275033028857652108, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38917,15 +38921,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8275033028857652108, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8275033028857652108, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8275033028857652108, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8275033028857652108, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -38939,10 +38943,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8275033028857652111, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
-      propertyPath: FollowTransform
-      value: 
-      objectReference: {fileID: 27259174}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a050ff9511addc49a064d857d4991ad, type: 3}
 --- !u!1001 &1363840848045975676
