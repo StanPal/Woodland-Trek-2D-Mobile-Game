@@ -750,6 +750,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3298883288347605292, guid: 5d5656a8d18fc8e4188fae99c5308a28, type: 3}
+      propertyPath: _bounceDirection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3298883288347605295, guid: 5d5656a8d18fc8e4188fae99c5308a28, type: 3}
       propertyPath: m_Name
       value: SpringPad

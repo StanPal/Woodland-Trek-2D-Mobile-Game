@@ -11,10 +11,16 @@ public class MovingPlatform : MonoBehaviour, IMovable
     [SerializeField] private int _endPoint = 0;
     [SerializeField] private float _distanceBetweenPoints = 0.1f;
 
+    private bool _activateMovement; 
+
+
     // Update is called once per frame
     void Update()
     {
-        MoveToNextPoint();
+        if (GameManager.Instance.State.Equals(GameState.Playable))
+        {
+            MoveToNextPoint();
+        }
     }
     
 
