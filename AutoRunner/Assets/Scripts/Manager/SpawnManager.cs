@@ -10,13 +10,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _transformSpeed = 1.0f; 
     private PlayerCollision _playerCollision;
 
-    private void Awake()
-    {
-        _playerCollision = FindObjectOfType<PlayerCollision>();
-    }
-
     void Start()
     {
+        _playerCollision = FindObjectOfType<PlayerCollision>();
         _playerCollision.OnDeath += _playerCollision_OnDeath;
     }
 
