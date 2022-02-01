@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class SkinManager : MonoBehaviour
 {
+    public static SkinManager Instance; 
     [SerializeField] private GameObject _characterSelectPanel;
     [SerializeField] private GameObject _mainMenuPanel;
     [SerializeField] private SpriteRenderer _sr;
@@ -14,6 +15,11 @@ public class SkinManager : MonoBehaviour
     
     private static int _selectedSkin = 0;
     public GameObject PlayerSkin;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
