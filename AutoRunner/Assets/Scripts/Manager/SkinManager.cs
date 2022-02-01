@@ -66,8 +66,8 @@ public class SkinManager : MonoBehaviour
 
     private void UpdateSprite(int index)
     {
-        //GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
-        //GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
+        GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
+        GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
         PlayerSkin.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
         PlayerSkin.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
     }
