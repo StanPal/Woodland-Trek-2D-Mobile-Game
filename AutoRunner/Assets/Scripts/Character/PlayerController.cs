@@ -72,6 +72,15 @@ public class PlayerController : MonoBehaviour
         OnReleaseJump += ReleaseHoldJump;
     }
 
+
+    private void OnDestroy()
+    {
+        _playerCollision.DisableControls -= DisableControls;
+        _spawnManager.OnRespawn -= OnRespawn;
+        OnJump -= Movment_OnJump;
+        OnHoldJump -= HoldJump;
+        OnReleaseJump -= ReleaseHoldJump;
+    }
     private void OnRespawn()
     {
         _isControllerDisabled = false;
@@ -130,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
     public void ReleaseHoldJumpPress()
     {
-            OnReleaseJump?.Invoke();
+        OnReleaseJump?.Invoke();
     }
 
     private void Movment_OnJump()

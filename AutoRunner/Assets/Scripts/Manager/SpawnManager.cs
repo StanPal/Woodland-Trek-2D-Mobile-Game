@@ -6,14 +6,21 @@ public class SpawnManager : MonoBehaviour
 {
     public event System.Action OnRespawn;
     public Transform RespawnPoint;
+    public GameObject Player { get; private set; }
 
     [SerializeField] private float _transformSpeed = 1.0f; 
     private PlayerCollision _playerCollision;
-
+   
     void Start()
     {
-        _playerCollision = FindObjectOfType<PlayerCollision>();
+        Player = Instantiate(GameManager.Instance.player, RespawnPoint.position, Quaternion.identity);
+        _playerCollision = Player.GetComponent<PlayerCollision>();
         _playerCollision.OnDeath += _playerCollision_OnDeath;
+    }
+
+    private void OnDestroy()
+    {
+        _playerCollision.OnDeath -= _playerCollision_OnDeath;
     }
 
     private void _playerCollision_OnDeath(GameObject player)
