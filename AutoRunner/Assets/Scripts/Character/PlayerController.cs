@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     public void ReleaseHoldJumpPress()
     {
-            OnReleaseJump?.Invoke();
+        OnReleaseJump?.Invoke();
     }
 
     private void Movment_OnJump()
