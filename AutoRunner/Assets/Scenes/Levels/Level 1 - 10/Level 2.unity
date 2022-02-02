@@ -40353,6 +40353,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnResume
       objectReference: {fileID: 0}
+    - target: {fileID: 2035395595, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: ControllerCanvas
+      value: 
+      objectReference: {fileID: 1758531345}
     - target: {fileID: 4524813518553289593, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -18,6 +18,11 @@ public class SpawnManager : MonoBehaviour
         _playerCollision.OnDeath += _playerCollision_OnDeath;
     }
 
+    private void OnDestroy()
+    {
+        _playerCollision.OnDeath -= _playerCollision_OnDeath;
+    }
+
     private void _playerCollision_OnDeath(GameObject player)
     {
         player.GetComponent<CapsuleCollider2D>().enabled = false;

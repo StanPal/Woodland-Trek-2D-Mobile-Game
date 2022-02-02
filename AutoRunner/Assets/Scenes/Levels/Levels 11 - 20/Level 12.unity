@@ -42474,7 +42474,7 @@ PrefabInstance:
     - target: {fileID: 4972236166413208689, guid: b0e83edad1bac5947ba18360778e487f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7189052396422042227, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
     - target: {fileID: 4972236166413208691, guid: b0e83edad1bac5947ba18360778e487f, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -42524,6 +42524,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2035395595, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
+      propertyPath: ControllerCanvas
+      value: 
+      objectReference: {fileID: 1345924296}
     - target: {fileID: 4079626875052806676, guid: 740328cd3a9d87641a8e415d019a1880, type: 3}
       propertyPath: m_RootOrder
       value: 4
