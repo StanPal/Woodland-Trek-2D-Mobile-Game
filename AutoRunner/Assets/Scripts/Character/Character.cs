@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Cinemachine;
+using UnityEngine;
 
 public class Character : MonoBehaviour
 {
@@ -35,12 +32,6 @@ public class Character : MonoBehaviour
     private void OnRespawn()
     {
         _animator.SetBool("IsDead", false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void CoinCollected()
