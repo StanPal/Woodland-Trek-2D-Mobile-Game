@@ -309,7 +309,7 @@ MonoBehaviour:
   _holdTime: 0
   _isHoldJump: 0
   _moveSpeed: 10
-  _airMoveSpeed: 20
+  _airMoveSpeed: 35
   _jumpForce: 10
   _originalJumpForce: 10
   _jumpMultiplier: 1.3
