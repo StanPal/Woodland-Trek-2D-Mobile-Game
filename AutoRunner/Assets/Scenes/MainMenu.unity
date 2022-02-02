@@ -750,7 +750,25 @@ MonoBehaviour:
   - {fileID: 22100000, guid: a985e0583535c4042b788e6db0965cdd, type: 2}
   - {fileID: 22100000, guid: c3212c506f8f4174c85a828ea7d73ba0, type: 2}
   - {fileID: 22100000, guid: e2739b383bc27f54088f19a31508172a, type: 2}
+  skinArrray:
+  - name: Virtual Guy
+    index: 0
+    price: 0
+    isUnlocked: 1
+  - name: Pink Guy
+    index: 1
+    price: 50
+    isUnlocked: 0
+  - name: Frog Guy
+    index: 2
+    price: 100
+    isUnlocked: 0
+  - name: Mask Guy
+    index: 3
+    price: 200
+    isUnlocked: 0
   PlayerSkin: {fileID: 5720285140715662218}
+  buyButton: {fileID: 739164464}
 --- !u!1 &377888721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1207,7 @@ GameObject:
   - component: {fileID: 433257842}
   - component: {fileID: 433257841}
   - component: {fileID: 433257840}
+  - component: {fileID: 433257843}
   m_Layer: 5
   m_Name: B_Settings
   m_TagString: Untagged
@@ -1259,7 +1278,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 433257841}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 433257843}
+        m_TargetAssemblyTypeName: CheatUnlocks, Assembly-CSharp
+        m_MethodName: GiveCoins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &433257841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1298,6 +1329,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433257838}
   m_CullTransparentMesh: 1
+--- !u!114 &433257843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433257838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c855af3a84662e42af6107b1e4d80a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &437015338 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8359535426210968545, guid: 06d4683fa8735fd43a679017320bb9ee, type: 3}
@@ -1681,7 +1724,7 @@ GameObject:
   - component: {fileID: 739164465}
   - component: {fileID: 739164464}
   m_Layer: 5
-  m_Name: B_Play (1)
+  m_Name: B_Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1751,9 +1794,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1595990786}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: GoToLevel
+      - m_Target: {fileID: 245321532}
+        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
+        m_MethodName: UnlockSkin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3512,9 +3555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Play
-
-'
+  m_text: Buy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

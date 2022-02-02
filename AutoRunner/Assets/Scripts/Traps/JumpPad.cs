@@ -6,7 +6,16 @@ public class JumpPad : MonoBehaviour
 {
     [SerializeField] private float _bounce;
     private Animator _animator;
-    private bool _isActive; 
+    private bool _isActive;
+    [SerializeField] private BounceDir _bounceDirection = BounceDir.up;
+
+    enum BounceDir
+    {
+        left,
+        right,
+        up,
+        down
+    }
 
     private void Start()
     {
@@ -19,8 +28,24 @@ public class JumpPad : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<PlayerCollision>())
             {
+                switch (_bounceDirection)
+                {
+                    case BounceDir.left:
+                        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * _bounce, ForceMode2D.Impulse);
+                        break;
+                    case BounceDir.right:
+                        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * _bounce, ForceMode2D.Impulse);
+                        break;
+                    case BounceDir.up:
+                        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * _bounce, ForceMode2D.Impulse);
+                        break;
+                    case BounceDir.down:
+                        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.down * _bounce, ForceMode2D.Impulse);
+                        break;
+                    default:
+                        break;
+                }
                 _animator.SetTrigger("PadTrigger");
-                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * _bounce, ForceMode2D.Impulse);
                 //collision.gameObject.GetComponent<Rigidbody2D>().velocity = (Vector2.up * _bounce);
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.ClampMagnitude(collision.gameObject.GetComponent<Rigidbody2D>().velocity, _bounce);
                 _isActive = true;

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RespawnPoint: {fileID: 8650754311235466219}
-  _transformSpeed: 5
+  _transformSpeed: 10
 --- !u!1 &8650754311235466220
 GameObject:
   m_ObjectHideFlags: 0

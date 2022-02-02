@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 5377894116594226095}
   - component: {fileID: 5377894116594226094}
   - component: {fileID: 5377894116403535194}
+  - component: {fileID: 239960875}
   m_Layer: 5
   m_Name: B_Jump
   m_TagString: Untagged
@@ -320,9 +321,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7189052396422042238, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
-          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-          m_MethodName: HoldJumpPress
+        - m_Target: {fileID: 239960875}
+          m_TargetAssemblyTypeName: EventCharacterHandler, Assembly-CSharp
+          m_MethodName: OnHold
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -336,9 +337,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7189052396422042238, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
-          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-          m_MethodName: ReleaseHoldJumpPress
+        - m_Target: {fileID: 239960875}
+          m_TargetAssemblyTypeName: EventCharacterHandler, Assembly-CSharp
+          m_MethodName: OnRelease
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -352,9 +353,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7189052396422042238, guid: 4ded1f9c62f7ea84ba45b95b9265df8e, type: 3}
-          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-          m_MethodName: Jump
+        - m_Target: {fileID: 239960875}
+          m_TargetAssemblyTypeName: EventCharacterHandler, Assembly-CSharp
+          m_MethodName: OnClick
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -364,6 +365,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &239960875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377894116594226092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4013ecee4135b46b77aadc1cb1f15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1936299267445097573
 PrefabInstance:
   m_ObjectHideFlags: 0
