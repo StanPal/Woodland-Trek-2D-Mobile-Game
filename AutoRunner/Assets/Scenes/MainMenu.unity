@@ -750,6 +750,23 @@ MonoBehaviour:
   - {fileID: 22100000, guid: a985e0583535c4042b788e6db0965cdd, type: 2}
   - {fileID: 22100000, guid: c3212c506f8f4174c85a828ea7d73ba0, type: 2}
   - {fileID: 22100000, guid: e2739b383bc27f54088f19a31508172a, type: 2}
+  skinArrray:
+  - name: Virtual Guy
+    index: 0
+    price: 0
+    isUnlocked: 1
+  - name: Pink Guy
+    index: 1
+    price: 50
+    isUnlocked: 0
+  - name: Frog Guy
+    index: 2
+    price: 100
+    isUnlocked: 0
+  - name: Mask Guy
+    index: 3
+    price: 200
+    isUnlocked: 0
   PlayerSkin: {fileID: 5720285140715662218}
 --- !u!1 &377888721
 GameObject:

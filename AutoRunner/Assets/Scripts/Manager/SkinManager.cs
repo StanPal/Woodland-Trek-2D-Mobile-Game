@@ -11,12 +11,28 @@ public class SkinManager : MonoBehaviour
     [SerializeField] private List<Sprite> skins = new List<Sprite>();
 
     public AnimatorOverrideController[] _animOverrideList;
+    public SkinBluePrint[] skinArrray;
     
     private static int _selectedSkin = 0;
     public GameObject PlayerSkin;
 
+
     private void Start()
     {
+        foreach(SkinBluePrint skin in skinArrray)
+        {
+            if(skin.price == 0)
+            {
+                skin.isUnlocked = true; 
+            }
+            else
+            {
+                skin.isUnlocked = PlayerPrefs.GetInt(skin.name, 0) == 0 ? false : true; 
+            }
+        }
+
+        _selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
+
         GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
         GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[_selectedSkin] as RuntimeAnimatorController;
         PlayerSkin.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite;
@@ -49,6 +65,8 @@ public class SkinManager : MonoBehaviour
         _sr.sprite = skins[_selectedSkin];
         Image.sprite = skins[_selectedSkin];
         UpdateSprite(_selectedSkin);
+
+        PlayerPrefs.SetInt("SelectedSkin", _selectedSkin);
     }
 
     public void PreviousOption()
@@ -62,6 +80,9 @@ public class SkinManager : MonoBehaviour
         _sr.sprite = skins[_selectedSkin];
         Image.sprite = skins[_selectedSkin];
         UpdateSprite(_selectedSkin);
+
+        PlayerPrefs.SetInt("SelectedSkin", _selectedSkin);
+
     }
 
     private void UpdateSprite(int index)
@@ -70,5 +91,8 @@ public class SkinManager : MonoBehaviour
         //GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
         PlayerSkin.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
         PlayerSkin.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
+        Debug.Log(PlayerPrefs.GetInt("SelectedSkin"));
     }
+
+
 }
