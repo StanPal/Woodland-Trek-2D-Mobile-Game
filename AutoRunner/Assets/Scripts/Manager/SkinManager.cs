@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SkinManager : MonoBehaviour
 {
+    public event System.Action onUpdateCoinTotal;
+
     [SerializeField] private GameObject _characterSelectPanel;
     [SerializeField] private GameObject _mainMenuPanel;
     [SerializeField] private SpriteRenderer _sr;
@@ -12,11 +15,12 @@ public class SkinManager : MonoBehaviour
 
     public AnimatorOverrideController[] _animOverrideList;
     public SkinBluePrint[] skinArrray;
-    
-    private static int _selectedSkin = 0;
     public GameObject PlayerSkin;
+    public Button buyButton;
 
 
+    private static int _selectedSkin = 0;
+    
     private void Start()
     {
         foreach(SkinBluePrint skin in skinArrray)
@@ -33,11 +37,20 @@ public class SkinManager : MonoBehaviour
 
         _selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
 
-        GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
-        GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[_selectedSkin] as RuntimeAnimatorController;
-        PlayerSkin.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite;
-        PlayerSkin.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[_selectedSkin] as RuntimeAnimatorController;
+        if (skinArrray[_selectedSkin].isUnlocked)
+        {
+            UpdateSprite(_selectedSkin);
+        }
+        else
+        {
+            UpdateSprite(0);
+        }
         Image.sprite = skins[_selectedSkin];
+    }
+
+    private void Update()
+    {
+        UpdateUI();
     }
 
     public void TogglePanel()
@@ -56,16 +69,18 @@ public class SkinManager : MonoBehaviour
 
     public void NextOption()
     {
-        _selectedSkin = _selectedSkin + 1; 
-        if(_selectedSkin == skins.Count)
+        _selectedSkin++;
+        if (_selectedSkin == skins.Count)
         {
             _selectedSkin = 0;
         }
 
-        _sr.sprite = skins[_selectedSkin];
-        Image.sprite = skins[_selectedSkin];
-        UpdateSprite(_selectedSkin);
-
+          Image.sprite = skins[_selectedSkin];
+        if (skinArrray[_selectedSkin].isUnlocked)
+        {
+           _sr.sprite = skins[_selectedSkin];
+            UpdateSprite(_selectedSkin);
+        }
         PlayerPrefs.SetInt("SelectedSkin", _selectedSkin);
     }
 
@@ -77,22 +92,56 @@ public class SkinManager : MonoBehaviour
             _selectedSkin = skins.Count - 1;
         }
 
-        _sr.sprite = skins[_selectedSkin];
         Image.sprite = skins[_selectedSkin];
-        UpdateSprite(_selectedSkin);
-
+        if (skinArrray[_selectedSkin].isUnlocked)
+        {
+            _sr.sprite = skins[_selectedSkin];
+            UpdateSprite(_selectedSkin);
+        }        
         PlayerPrefs.SetInt("SelectedSkin", _selectedSkin);
 
     }
 
     private void UpdateSprite(int index)
     {
-        //GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
-        //GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
+        GameManager.Instance.player.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
+        GameManager.Instance.player.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
         PlayerSkin.GetComponent<SpriteRenderer>().sprite = _sr.sprite;
         PlayerSkin.GetComponent<Animator>().runtimeAnimatorController = _animOverrideList[index] as RuntimeAnimatorController;
         Debug.Log(PlayerPrefs.GetInt("SelectedSkin"));
     }
 
+    public void UnlockSkin()
+    {
+        SkinBluePrint s = skinArrray[_selectedSkin];
+        PlayerPrefs.SetInt(s.name, 1);
+        PlayerPrefs.SetInt("SelectedSkin", _selectedSkin);
+        s.isUnlocked = true;
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - s.price);
+        onUpdateCoinTotal?.Invoke();
+        UpdateSprite(_selectedSkin);
+    }
+
+    private void UpdateUI()
+    {
+        SkinBluePrint s = skinArrray[_selectedSkin];
+        if(s.isUnlocked)
+        {
+            buyButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            buyButton.gameObject.SetActive(true);
+            buyButton.GetComponentInChildren<TextMeshProUGUI>().text = "Buy " + s.price;
+            if (s.price < PlayerPrefs.GetInt("Coins", 0))
+            {
+                buyButton.interactable = true;
+            }
+            else
+            {
+                buyButton.interactable = false;
+            }
+        }
+    }
 
 }
