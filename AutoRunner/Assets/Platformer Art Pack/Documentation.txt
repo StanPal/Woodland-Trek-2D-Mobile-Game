@@ -1,0 +1,4 @@
+- All of the backgrounds are parallax scrollable (2 horizontal and 1 both vertical and horizontal)
+- All animations are demonstrated in the DemoShowcase which also contains all of the art assets in this pack
+- The ExampleScene is to give you an idea of what can be made using this asset.
+Be sure to give it a good rating on the Asset Store if you like it!
