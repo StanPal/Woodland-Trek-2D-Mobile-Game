@@ -122,7 +122,6 @@ public class TutorialManager : MonoBehaviour
         _isTutorialOn = false;
         PlayerPrefs.SetInt("Tutorial " + _currentLevel.ToString(), 1);
         GameManager.Instance.UpdateGameState(GameState.LevelStart);
-        _spawnManager.SpawnPlayer();
     }
 
     private void DeactivateLists()
