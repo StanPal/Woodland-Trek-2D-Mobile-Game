@@ -28,13 +28,19 @@ public class GameManager : MonoBehaviour
             UpdateGameState(GameState.GameStart);
         }
         else if( _replayLevel)
-        {
-            Debug.Log(true);
+        {            
             UpdateGameState(GameState.LevelRestart);
         }
         else
         {
-            UpdateGameState(GameState.LevelStart);
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                UpdateGameState(GameState.Tutorial);
+            }
+            else
+            {
+                UpdateGameState(GameState.LevelStart);
+            }
         }
     }
 
@@ -45,6 +51,8 @@ public class GameManager : MonoBehaviour
         {
             case GameState.GameStart:
                 break;
+            case GameState.Tutorial:
+                break; 
             case GameState.LevelStart:
                 Time.timeScale = 1;
                 break;
@@ -70,12 +78,12 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name, time);
     }
-
 }
 
 public enum GameState
 {
     GameStart,
+    Tutorial,
     LevelStart,
     LevelRestart,
     Playable,

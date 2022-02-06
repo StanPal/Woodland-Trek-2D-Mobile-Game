@@ -12,6 +12,14 @@ public class SpawnManager : MonoBehaviour
     private PlayerCollision _playerCollision;
    
     void Start()
+    {        
+        if(GameManager.Instance.State != GameState.Tutorial)
+        {
+            SpawnPlayer();
+        }
+    }
+    
+    public void SpawnPlayer()
     {
         Player = Instantiate(GameManager.Instance.player, RespawnPoint.position, Quaternion.identity);
         _playerCollision = Player.GetComponent<PlayerCollision>();
@@ -19,8 +27,11 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void OnDestroy()
-    {
-        _playerCollision.OnDeath -= _playerCollision_OnDeath;
+    {        
+        if (_playerCollision)
+        {
+            _playerCollision.OnDeath -= _playerCollision_OnDeath;
+        }
     }
 
     private void _playerCollision_OnDeath(GameObject player)

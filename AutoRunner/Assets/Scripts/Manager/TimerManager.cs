@@ -53,8 +53,7 @@ public class TimerManager : MonoBehaviour
         _isNewBest = false;
         _goal.OnReachedGoal += OnReachedGoal;
         _spawnManager.OnRespawn += OnRespawn;
-        OnTimerStopped += ToggleWinPanel;
-        Debug.Log(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name));
+        OnTimerStopped += ToggleWinPanel;        
     }
 
 

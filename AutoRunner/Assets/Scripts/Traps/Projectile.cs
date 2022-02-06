@@ -6,11 +6,11 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _resetTime;
-    private float _lifeTime; 
+    //private float _lifeTime; 
     
     public void ActivateProjectile()
     {
-        _lifeTime = 0;
+        //_lifeTime = 0;
         gameObject.SetActive(true);
     }
 
