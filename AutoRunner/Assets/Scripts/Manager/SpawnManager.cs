@@ -5,20 +5,20 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public event System.Action OnRespawn;
+    public static SpawnManager Instance;
+
     public Transform RespawnPoint;
     public GameObject Player { get; private set; }
+    public bool IsTutorialOn;
 
     [SerializeField] private float _transformSpeed = 1.0f; 
     private PlayerCollision _playerCollision;
-   
-    void Start()
-    {        
-        if(GameManager.Instance.State != GameState.Tutorial)
-        {
-            SpawnPlayer();
-        }
+
+    private void Awake()
+    {
+        Instance = this;
     }
-    
+
     public void SpawnPlayer()
     {
         Player = Instantiate(GameManager.Instance.player, RespawnPoint.position, Quaternion.identity);

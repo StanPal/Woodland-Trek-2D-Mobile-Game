@@ -40077,6 +40077,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -6.21
       objectReference: {fileID: 0}
+    - target: {fileID: 6431355687814850380, guid: ec8191b1e3f7d34479a7f99479b79afb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7376879020888462117, guid: ec8191b1e3f7d34479a7f99479b79afb, type: 3}
       propertyPath: m_Name
       value: Serizawa

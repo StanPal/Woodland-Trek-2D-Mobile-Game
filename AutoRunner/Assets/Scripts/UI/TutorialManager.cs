@@ -13,14 +13,13 @@ public class TutorialManager : MonoBehaviour
     public GameObject Coin; 
     public bool _isTutorialOn;
     private int _listIndex = 0;
-    private SpawnManager _spawnManager; 
+
 
     private void Start()
     {
-        _spawnManager = FindObjectOfType<SpawnManager>();
-        _isTutorialOn = PlayerPrefs.GetInt("Tutorial " + _currentLevel.ToString(), 0) == 0 ? true : false;
+        _isTutorialOn = PlayerPrefs.GetInt("Tutorial " + _currentLevel, 0) == 0 ? true : false;
         if (_isTutorialOn)
-        {
+        { 
             TextList[0].gameObject.SetActive(true);
         }
         else
@@ -43,12 +42,12 @@ public class TutorialManager : MonoBehaviour
         if(_isTutorialOn)
         {
             _isTutorialOn = false;
-            PlayerPrefs.SetInt("Tutorial " + _currentLevel.ToString(), 1);
+            PlayerPrefs.SetInt("Tutorial " + _currentLevel, 1);
         }
         else
         {
             _isTutorialOn = true;
-            PlayerPrefs.SetInt("Tutorial " + _currentLevel.ToString(), 0);
+            PlayerPrefs.SetInt("Tutorial " + _currentLevel, 0);
         }
     }
 
