@@ -3645,6 +3645,7 @@ MonoBehaviour:
   _clipList:
   - {fileID: 8300000, guid: c369cfb156509434fbb67186cd5f02df, type: 3}
   - {fileID: 8300000, guid: dc6a558b220241c4d9976f79beffa425, type: 3}
+  - {fileID: 8300000, guid: 289fee586b7e2ff498bc0cb29ed8caa9, type: 3}
 --- !u!1 &1591287641
 GameObject:
   m_ObjectHideFlags: 0
