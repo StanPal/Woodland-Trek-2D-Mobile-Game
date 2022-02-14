@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (SceneManager.GetActiveScene().buildIndex == 1)
+            if (SceneManager.GetActiveScene().name == "Level 1")
             {
                 UpdateGameState(GameState.Tutorial);
             }
