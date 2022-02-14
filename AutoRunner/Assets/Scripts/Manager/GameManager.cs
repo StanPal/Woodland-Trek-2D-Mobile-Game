@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
             UpdateGameState(GameState.GameStart);
         }
         else if( _replayLevel)
-        {            
+        {
             UpdateGameState(GameState.LevelRestart);
         }
         else if(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 break;
             case GameState.LevelRestart:
+                SpawnManager.Instance.SpawnPlayer();
+                Time.timeScale = 1;
                 break;
             case GameState.Playable:
                 break;
