@@ -29,8 +29,8 @@ public class SoundManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        _audioSource = GetComponentInChildren<AudioSource>();
+    {        
+        _audioSource = GetComponentsInChildren<AudioSource>()[0];
     }
 
     private void GameManagerOnGameStateChanged(GameState state)
@@ -43,7 +43,10 @@ public class SoundManager : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex > 11)
             {
-                PlayClip(1);
+                if (_audioSource.clip != _clipList[1])
+                {
+                    PlayClip(1);
+                }
             }
         }
         else if (GameManager.Instance.State == GameState.GameEnd)
