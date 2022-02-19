@@ -37,7 +37,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _originalJumpForce;
     [SerializeField] private float _jumpMultiplier;
-    [SerializeField] private float _jumpChargeSpeed; 
+    [SerializeField] private float _jumpChargeSpeed;
+    [SerializeField] private float _coyoteTime = 0.2f;
+    private float coyoteTimeCounter; 
     
 
     [Header("Wall Jump")]
@@ -103,7 +105,16 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.State == GameState.Playable)
         {
             _moveX = SimpleInput.GetAxis("Horizontal");
-            if (IsGrounded() && Input.GetButtonDown("Jump"))
+            if(IsGrounded())
+            {
+                coyoteTimeCounter = _coyoteTime;
+            }
+            else
+            {
+                coyoteTimeCounter -= Time.deltaTime;
+            }
+
+            if (coyoteTimeCounter > 0f && Input.GetButtonDown("Jump"))
             {
                 Jump();
             }
@@ -241,12 +252,13 @@ public class PlayerController : MonoBehaviour
         {
             if (!_isControllerDisabled)
             {
-                if (IsGrounded() && !_isHoldJump)
+                if (coyoteTimeCounter > 0f && !_isHoldJump)
                 {
                     _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
                     _animator.SetTrigger("JumpTrigger");
                     CreateJumpDust();
                     StopCoroutine(HoldingJump());
+                    coyoteTimeCounter = 0f;
                 }
                 else if ((_isWallSliding || _wallCheckHit) && _moveX != 0)
                 {
