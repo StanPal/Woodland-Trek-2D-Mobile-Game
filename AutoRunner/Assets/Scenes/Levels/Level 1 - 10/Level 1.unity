@@ -38911,6 +38911,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1021870427}
+    - target: {fileID: 5313311521020971900, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314159040652504674, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5377894116456087777, guid: dfb33987fb1a3414daf6dd68cb22a065, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -39503,6 +39511,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8811971287266575612, guid: ca4c5ac21c296da4e8f847e7d0fbe952, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811971288561545519, guid: ca4c5ac21c296da4e8f847e7d0fbe952, type: 3}
+      propertyPath: m_fontStyle
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

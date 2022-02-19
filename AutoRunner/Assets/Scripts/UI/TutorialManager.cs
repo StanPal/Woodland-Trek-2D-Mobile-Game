@@ -19,7 +19,8 @@ public class TutorialManager : MonoBehaviour
     {
         _isTutorialOn = PlayerPrefs.GetInt("Tutorial " + _currentLevel, 0) == 0 ? true : false;
         if (_isTutorialOn)
-        { 
+        {
+            DeactivateLists();
             TextList[0].gameObject.SetActive(true);
         }
         else
