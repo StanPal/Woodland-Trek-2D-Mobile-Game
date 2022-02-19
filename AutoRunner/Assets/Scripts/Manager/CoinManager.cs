@@ -25,7 +25,7 @@ public class CoinManager : MonoBehaviour
 
     }
 
-    private void onUpdateCoinTotal()
+    public void onUpdateCoinTotal()
     {
         _coinTotal.text = PlayerPrefs.GetInt("Coins").ToString();
     }    

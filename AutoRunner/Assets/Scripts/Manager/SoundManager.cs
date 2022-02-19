@@ -11,7 +11,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _effectsSource;
     [SerializeField] List<AudioClip> _clipList;
     private AudioSource _audioSource;
-    static bool _onContiniousPlay; 
+    static bool _onContiniousPlay;
+    static float volume;
 
     private void Awake()
     {
@@ -75,6 +76,11 @@ public class SoundManager : MonoBehaviour
     public void ChangeMasterVolume(float value)
     {
         AudioListener.volume = value;
+    }
+
+    public float UpdateMasterVolume()
+    {
+        return AudioListener.volume;
     }
 
     public void ToggleEffects()
