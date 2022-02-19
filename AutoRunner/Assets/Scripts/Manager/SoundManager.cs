@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _effectsSource;
     [SerializeField] List<AudioClip> _clipList;
+    private AudioSource _audioSource;
     static bool _onContiniousPlay; 
 
     private void Awake()
@@ -27,25 +28,35 @@ public class SoundManager : MonoBehaviour
         GameManager.OnGameStateChanged += GameManagerOnGameStateChanged;
     }
 
+    private void Start()
+    {
+        _audioSource = GetComponentInChildren<AudioSource>();
+    }
+
     private void GameManagerOnGameStateChanged(GameState state)
     {
         if (GameManager.Instance.State == GameState.GameStart)
         {
-            _musicSource.Stop();
-            _musicSource.PlayOneShot(_clipList[0]);
+            PlayClip(0);
         }
         else if (GameManager.Instance.State == GameState.LevelStart)
         {
-            if (SceneManager.GetActiveScene().buildIndex <= 10)
+            if (SceneManager.GetActiveScene().buildIndex > 11)
             {
-                if (_onContiniousPlay)
-                {
-                    _musicSource.Stop();
-                    _musicSource.PlayOneShot(_clipList[1]);
-                    _onContiniousPlay = false;
-                }
+                PlayClip(1);
             }
         }
+        else if (GameManager.Instance.State == GameState.GameEnd)
+        {
+            PlayClip(2);
+        }
+    }
+
+    private void PlayClip(int clipIndex)
+    {
+        _musicSource.Stop();
+        _audioSource.clip = _clipList[clipIndex];
+        _musicSource.Play();
     }
 
     public void PlaySound(AudioClip clip)
@@ -74,10 +85,3 @@ public class SoundManager : MonoBehaviour
     }
 }
 
-public enum SoundLevelState
-{
-    Mainmenu, 
-    Level1_10,
-    Level11_20,
-    EndScreen
-}

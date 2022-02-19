@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public bool OnReplayLevel { get => _replayLevel; set => _replayLevel = value; }
 
     private TimerManager _timerManager;
+    private SpawnManager _spawnManager;
 
     private void Awake()
     {
@@ -23,18 +24,29 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _timerManager = FindObjectOfType<TimerManager>();
+        _spawnManager = FindObjectOfType<SpawnManager>();
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             UpdateGameState(GameState.GameStart);
         }
         else if( _replayLevel)
         {
-            Debug.Log(true);
             UpdateGameState(GameState.LevelRestart);
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            UpdateGameState(GameState.GameEnd);
         }
         else
         {
-            UpdateGameState(GameState.LevelStart);
+            if (SceneManager.GetActiveScene().name == "Level 1")
+            {
+                UpdateGameState(GameState.Tutorial);
+            }
+            else
+            {
+                UpdateGameState(GameState.LevelStart);
+            }
         }
     }
 
@@ -45,10 +57,15 @@ public class GameManager : MonoBehaviour
         {
             case GameState.GameStart:
                 break;
+            case GameState.Tutorial:
+                break; 
             case GameState.LevelStart:
+                SpawnManager.Instance.SpawnPlayer();
                 Time.timeScale = 1;
                 break;
             case GameState.LevelRestart:
+                SpawnManager.Instance.SpawnPlayer();
+                Time.timeScale = 1;
                 break;
             case GameState.Playable:
                 break;
@@ -70,12 +87,12 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name, time);
     }
-
 }
 
 public enum GameState
 {
     GameStart,
+    Tutorial,
     LevelStart,
     LevelRestart,
     Playable,

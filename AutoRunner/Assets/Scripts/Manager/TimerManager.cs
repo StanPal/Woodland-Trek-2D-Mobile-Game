@@ -53,8 +53,7 @@ public class TimerManager : MonoBehaviour
         _isNewBest = false;
         _goal.OnReachedGoal += OnReachedGoal;
         _spawnManager.OnRespawn += OnRespawn;
-        OnTimerStopped += ToggleWinPanel;
-        Debug.Log(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name));
+        OnTimerStopped += ToggleWinPanel;        
     }
 
 
@@ -90,7 +89,6 @@ public class TimerManager : MonoBehaviour
         GameManager.Instance.State = GameState.Playable;
         CountDownText.enabled = false;
         _isPlaying = true;
-        
     }
 
     private void ToggleWinPanel()
@@ -134,14 +132,15 @@ public class TimerManager : MonoBehaviour
             int minutes = Mathf.FloorToInt(_currentTime / 60f);
             int seconds = Mathf.FloorToInt(_currentTime % 60f);
             int milliseconds = Mathf.FloorToInt((_currentTime * 100f) % 100f);
-            BestTime.text = "New Record! " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
+            //BestTime.text = "New Record! " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
+            BestTime.text = "New Record! ";
         }
         else
         {
-            int minutes = Mathf.FloorToInt(previousTime / 60f);
-            int seconds = Mathf.FloorToInt(previousTime % 60f);
-            int milliseconds = Mathf.FloorToInt((previousTime * 100f) % 100f);
-            BestTime.text = "Best Time: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
+            //int minutes = Mathf.FloorToInt(previousTime / 60f);
+            //int seconds = Mathf.FloorToInt(previousTime % 60f);
+            //int milliseconds = Mathf.FloorToInt((previousTime * 100f) % 100f);
+            //BestTime.text = "Best Time: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
         }
 
     }

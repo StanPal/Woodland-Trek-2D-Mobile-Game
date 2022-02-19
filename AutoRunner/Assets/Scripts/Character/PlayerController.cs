@@ -7,6 +7,10 @@ public class PlayerController : MonoBehaviour
     private event System.Action OnHoldJump;
     private event System.Action OnReleaseJump;
 
+    public ParticleSystem DustEffect;
+    public ParticleSystem JumpEffect;
+    private ParticleSystem _jumpEffectModifier; 
+
     public LayerMask _groundLayer;
     public Transform Feet;
 
@@ -17,8 +21,7 @@ public class PlayerController : MonoBehaviour
     private PlayerCollision _playerCollision;
     private SpawnManager _spawnManager;
     private Color _originalSpriteColor;
-
-    private bool _isGrounded;
+    
     private float _moveX;
     private float _groundRadius = 0.5f;
     [SerializeField] private float _holdTime; 
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
         _playerCollision = GetComponent<PlayerCollision>();
+        _jumpEffectModifier = JumpEffect.GetComponent<ParticleSystem>();
     }
 
     private void Start()
@@ -114,7 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
         }
-        else if (!_isGrounded && !_isWallSliding && _moveX != 0)
+        else if (!IsGrounded() && !_isWallSliding && _moveX != 0)
         {
             _rb.AddForce(new Vector2(_airMoveSpeed * _moveX, 0));
             if(Mathf.Abs(_rb.velocity.x) > _moveSpeed)
@@ -126,6 +130,81 @@ public class PlayerController : MonoBehaviour
         WallSlide();
 
     }
+
+    #region Movement
+    private void Movement()
+    {
+        Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
+        _rb.velocity = movement;
+        _animator.SetFloat("Speed", Mathf.Abs(movement.x));
+        if (IsGrounded())
+        {
+            if (_rb.velocity.x > 0.3f || _rb.velocity.x < -0.3f)
+            {
+                CreateDust();
+            }
+            else
+            {
+                StopDust();
+            }
+        }
+    }
+
+    private bool IsGrounded()
+    {
+
+        float extraHeight = 0.05f;
+        Collider2D groundCheck = Physics2D.OverlapCircle(Feet.position, _groundRadius, _groundLayer);
+        RaycastHit2D raycastHit = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeight, _groundLayer);
+        Color rayColor;
+
+        if (raycastHit.collider != null)
+        {
+            _animator.SetBool("IsGrounded", true);
+            rayColor = Color.green;
+        }
+        else
+        {
+            _animator.SetBool("IsGrounded", false);
+            StopDust();
+            rayColor = Color.red;
+        }
+        Debug.DrawRay(_capsuleCollider.bounds.center, Vector2.down * (_capsuleCollider.bounds.extents.y + extraHeight), rayColor);
+
+        if (groundCheck != null)
+        {
+            _animator.SetBool("IsJumping", false);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void FlipCharacter()
+    {
+        if (!_isWallSliding)
+        {
+            Vector3 characterScale = transform.localScale;
+            if (SimpleInput.GetAxis("Horizontal") < 0)
+            {
+                _wallJumpDirection = 1;
+                characterScale.x = -1;
+                _isFacingRight = false;
+            }
+            if (SimpleInput.GetAxis("Horizontal") > 0)
+            {
+                _wallJumpDirection = -1;
+                characterScale.x = 1;
+                _isFacingRight = true;
+            }
+            transform.localScale = characterScale;
+        }
+    }
+    #endregion
+
+    #region Jump
 
     public void Jump()
     {   
@@ -152,6 +231,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
                     _animator.SetTrigger("JumpTrigger");
+                    CreateJumpDust();
                     StopCoroutine(HoldingJump());
                 }
                 else if ((_isWallSliding || _wallCheckHit))
@@ -167,6 +247,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded())
         {
             _isHoldJump = true;
+            ModifyJumpParticle(0.1f);
         }
         if(_isHoldJump)
         {
@@ -203,6 +284,7 @@ public class PlayerController : MonoBehaviour
                 _jumpForce = _originalJumpForce * _jumpMultiplier;
             }
             _jumpForce += _jumpChargeSpeed;
+            ModifyJumpParticle(0.5f);
             yield return new WaitForSeconds(0.2f);
         }
     }
@@ -226,12 +308,9 @@ public class PlayerController : MonoBehaviour
         _sprite.color = spriteColor;
     }
 
-    private void Movement()
-    {
-        Vector2 movement = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
-        _rb.velocity = movement;
-        _animator.SetFloat("Speed", Mathf.Abs(movement.x));
-    }
+    #endregion
+
+    #region WallJump
 
     private void FacingWallCheck()
     {
@@ -268,58 +347,28 @@ public class PlayerController : MonoBehaviour
             _rb.AddForce(new Vector2(
             _wallJumpForce * _wallJumpDirection * _wallJumpAngle.x, _wallJumpForce * _wallJumpAngle.y), ForceMode2D.Impulse);
     }
+    #endregion
 
-    private bool IsGrounded()
+    #region Particle Effects
+    private void CreateDust()
     {
-        
-        float extraHeight = 0.05f;
-        Collider2D groundCheck = Physics2D.OverlapCircle(Feet.position, _groundRadius, _groundLayer);
-        RaycastHit2D raycastHit = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeight, _groundLayer);
-        Color rayColor;
-
-        if (raycastHit.collider != null)
-        {
-            _animator.SetBool("IsGrounded", true);
-            rayColor = Color.green;
-        }
-        else
-        {
-            _animator.SetBool("IsGrounded", false);
-            rayColor = Color.red;
-        }
-        Debug.DrawRay(_capsuleCollider.bounds.center, Vector2.down * (_capsuleCollider.bounds.extents.y + extraHeight), rayColor);
-
-        if (groundCheck != null)
-        {
-            _animator.SetBool("IsJumping", false);
-            return true;
-        }
-        else
-        {   
-            return false;
-        }
+        DustEffect.Play();
     }
 
-    private void FlipCharacter()
+    private void CreateJumpDust()
     {
-        if (!_isWallSliding)
-        {
-            Vector3 characterScale = transform.localScale;
-            if (SimpleInput.GetAxis("Horizontal") < 0)
-            {
-                _wallJumpDirection = 1;
-                characterScale.x = -1;
-                _isFacingRight = false;
-
-            }
-            if (SimpleInput.GetAxis("Horizontal") > 0)
-            {
-                _wallJumpDirection = -1;
-                characterScale.x = 1;
-                _isFacingRight = true;
-            }
-
-            transform.localScale = characterScale;
-        }
+        JumpEffect.Play();
     }
+
+    private void StopDust()
+    {
+        DustEffect.Stop();
+    }
+
+    private void ModifyJumpParticle(float size)
+    {
+        var mainSizePS = _jumpEffectModifier.main;
+        mainSizePS.startSize = size;
+    }
+    #endregion
 }

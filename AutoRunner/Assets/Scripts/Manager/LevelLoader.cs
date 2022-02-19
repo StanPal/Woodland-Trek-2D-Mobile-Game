@@ -22,7 +22,7 @@ public class LevelLoader : MonoBehaviour
 
     public void GoToLevel()
     {
-        StartCoroutine(LoadLevel(1));
+        StartCoroutine(LoadLevel(2));
     }
 
     public void GoToMain()
