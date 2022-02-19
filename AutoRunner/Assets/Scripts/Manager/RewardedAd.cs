@@ -52,7 +52,7 @@ public class RewardedAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
     public void ShowAd()
     {
         // Disable the button: 
-        //_showAdButton.interactable = false;
+        _showAdButton.interactable = false;
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
     }
@@ -64,9 +64,13 @@ public class RewardedAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-
+            int currentCoins = PlayerPrefs.GetInt("Coins");
+            Debug.Log(currentCoins);
+            currentCoins = currentCoins + 10;
+            PlayerPrefs.SetInt("Coins", currentCoins);
             // Load another ad:
-            Advertisement.Load(_adUnitId, this);
+            //Advertisement.Load(_adUnitId, this);
+            _showAdButton.interactable = true;
         }
     }
 

@@ -19,6 +19,11 @@ public class CoinManager : MonoBehaviour
         _skinManager.onUpdateCoinTotal += onUpdateCoinTotal;
     }
 
+    private void Update()
+    {
+        _coinTotal.text = PlayerPrefs.GetInt("Coins").ToString();
+    }
+
     private void OnDestroy()
     {
         _skinManager.onUpdateCoinTotal -= onUpdateCoinTotal;
@@ -28,5 +33,5 @@ public class CoinManager : MonoBehaviour
     public void onUpdateCoinTotal()
     {
         _coinTotal.text = PlayerPrefs.GetInt("Coins").ToString();
-    }    
+    }
 }

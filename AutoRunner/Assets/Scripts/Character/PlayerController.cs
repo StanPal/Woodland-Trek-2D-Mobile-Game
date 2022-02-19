@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float yWallForce;
     [SerializeField] private float _wallJumpTime;
     private RaycastHit2D _wallCheckHit;
-    private float _wallJumpDirection;
+    //private float _wallJumpDirection;
     private bool _isWallSliding;
     private bool _wallJumping; 
 
@@ -223,13 +223,13 @@ public class PlayerController : MonoBehaviour
             Vector3 characterScale = transform.localScale;
             if (SimpleInput.GetAxis("Horizontal") < 0)
             {
-                _wallJumpDirection = 1;
+                //_wallJumpDirection = 1;
                 characterScale.x = -1;
                 _isFacingRight = false;
             }
             if (SimpleInput.GetAxis("Horizontal") > 0)
             {
-                _wallJumpDirection = -1;
+                //_wallJumpDirection = -1;
                 characterScale.x = 1;
                 _isFacingRight = true;
             }
