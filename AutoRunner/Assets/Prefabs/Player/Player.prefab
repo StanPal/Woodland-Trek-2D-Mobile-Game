@@ -5129,6 +5129,9 @@ MonoBehaviour:
   _wallJumpForce: 15
   _wallDistance: 0.8
   _wallSlideSpeed: -1
+  xwallForce: 5
+  yWallForce: 12
+  _wallJumpTime: 0.07
 --- !u!114 &7189052396422042236
 MonoBehaviour:
   m_ObjectHideFlags: 0

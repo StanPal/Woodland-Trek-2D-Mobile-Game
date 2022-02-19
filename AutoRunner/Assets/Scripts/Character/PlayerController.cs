@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _wallJumpForce;
     [SerializeField] private float _wallDistance;
     [SerializeField] private float _wallSlideSpeed;
+    [SerializeField] private float xwallForce;
+    [SerializeField] private float yWallForce;
+    [SerializeField] private float _wallJumpTime;
     private RaycastHit2D _wallCheckHit;
     private float _wallJumpDirection;
     private bool _isWallSliding;
@@ -66,7 +69,7 @@ public class PlayerController : MonoBehaviour
         _spawnManager = FindObjectOfType<SpawnManager>();
 
         _originalSpriteColor = _sprite.color;
-        _wallJumpAngle.Normalize();
+       // _wallJumpAngle.Normalize();
 
         _playerCollision.DisableControls += DisableControls;
 
@@ -106,9 +109,20 @@ public class PlayerController : MonoBehaviour
             }
             if ((_isWallSliding || _wallCheckHit) && Input.GetButtonDown("Jump"))
             {
+                _wallJumping = true;
+                Invoke("SetWallJumpingToFalse", _wallJumpTime);
+            }
+            if (_wallJumping == true)
+            {
                 WallJump();
             }
+
         }
+    }
+
+    private void SetWallJumpingToFalse()
+    {
+        _wallJumping = false; 
     }
 
     private void FixedUpdate()
@@ -121,7 +135,7 @@ public class PlayerController : MonoBehaviour
         else if (!IsGrounded() && !_isWallSliding && _moveX != 0)
         {
             _rb.AddForce(new Vector2(_airMoveSpeed * _moveX, 0));
-            if(Mathf.Abs(_rb.velocity.x) > _moveSpeed)
+            if (Mathf.Abs(_rb.velocity.x) > _moveSpeed)
             {
                 _rb.velocity = new Vector2(_moveX * _moveSpeed, _rb.velocity.y);
             }
@@ -236,7 +250,9 @@ public class PlayerController : MonoBehaviour
                 }
                 else if ((_isWallSliding || _wallCheckHit))
                 {
-                    WallJump();
+                    _wallJumping = true;
+                    Invoke("SetWallJumpingToFalse", _wallJumpTime);
+                    // WallJump();
                 }
             }
         }
@@ -338,14 +354,15 @@ public class PlayerController : MonoBehaviour
 
         if(_isWallSliding)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, _wallSlideSpeed);
+            _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y,_wallSlideSpeed,float.MaxValue));
         }
     }
 
     private void WallJump()
     {
-            _rb.AddForce(new Vector2(
-            _wallJumpForce * _wallJumpDirection * _wallJumpAngle.x, _wallJumpForce * _wallJumpAngle.y), ForceMode2D.Impulse);
+        _rb.velocity = new Vector2(xwallForce * -_moveX, yWallForce);
+        //_rb.AddForce(new Vector2(
+        //    _wallJumpForce * _wallJumpDirection * _wallJumpAngle.x, _wallJumpForce * _wallJumpAngle.y), ForceMode2D.Impulse);
     }
     #endregion
 
