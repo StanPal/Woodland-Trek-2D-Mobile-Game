@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Wall Jump")]
     [SerializeField] private LayerMask _wallLayer;
-    [SerializeField] private Vector2 _wallJumpAngle;
+    //[SerializeField] private Vector2 _wallJumpAngle;
     [SerializeField] private float _wallJumpForce;
     [SerializeField] private float _wallDistance;
     [SerializeField] private float _wallSlideSpeed;
@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour
                     CreateJumpDust();
                     StopCoroutine(HoldingJump());
                 }
-                else if ((_isWallSliding || _wallCheckHit))
+                else if ((_isWallSliding || _wallCheckHit) && _moveX != 0)
                 {
                     _wallJumping = true;
                     Invoke("SetWallJumpingToFalse", _wallJumpTime);
