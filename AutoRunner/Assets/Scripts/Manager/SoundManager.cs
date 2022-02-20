@@ -10,7 +10,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _effectsSource;
     [SerializeField] List<AudioClip> _clipList;
-    private AudioSource _audioSource;
     static bool _onContiniousPlay;
     static float volume;
 
@@ -30,8 +29,8 @@ public class SoundManager : MonoBehaviour
     }
 
     private void Start()
-    {        
-        _audioSource = GetComponentsInChildren<AudioSource>()[0];
+    {
+
     }
 
     private void GameManagerOnGameStateChanged(GameState state)
@@ -44,7 +43,7 @@ public class SoundManager : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex > 11)
             {
-                if (_audioSource.clip != _clipList[1])
+                if(_musicSource != null && _musicSource != _clipList[1])
                 {
                     PlayClip(1);
                 }
@@ -57,9 +56,9 @@ public class SoundManager : MonoBehaviour
     }
 
     private void PlayClip(int clipIndex)
-    {
+    {           
         _musicSource.Stop();
-        _audioSource.clip = _clipList[clipIndex];
+        _musicSource.clip = _clipList[clipIndex];
         _musicSource.Play();
     }
 
