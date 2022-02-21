@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviour
         }
         else if (GameManager.Instance.State == GameState.LevelStart)
         {
-            if (SceneManager.GetActiveScene().buildIndex > 11)
+            if (SceneManager.GetActiveScene().buildIndex == 12)
             {
                 if(_musicSource != null && _musicSource != _clipList[1])
                 {
@@ -52,6 +52,10 @@ public class SoundManager : MonoBehaviour
         else if (GameManager.Instance.State == GameState.GameEnd)
         {
             PlayClip(2);
+        }
+        else
+        {
+            return; 
         }
     }
 
