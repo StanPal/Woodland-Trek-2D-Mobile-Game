@@ -7,9 +7,11 @@ public class ArrowTrap : MonoBehaviour
     private SpawnManager _spawnManager;
 
     [SerializeField] private float _attackCooldown;
+    [SerializeField] private float _speed = 1.0f;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private GameObject[] _arrows;
     private float _coolDownTimer;
+    public float ArrowSpeed { get => _speed; }
 
     private void Awake()
     {

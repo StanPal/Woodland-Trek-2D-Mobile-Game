@@ -7,7 +7,19 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _resetTime;
     //private float _lifeTime; 
-    
+
+    private ArrowTrap _arrowTrap;
+
+    private void Awake()
+    {
+        _arrowTrap = GetComponentInParent<ArrowTrap>();
+    }
+
+    private void Start()
+    {
+        _speed = _arrowTrap.ArrowSpeed;
+    }
+
     public void ActivateProjectile()
     {
         //_lifeTime = 0;
@@ -36,6 +48,6 @@ public class Projectile : MonoBehaviour
         if(collision.tag.Equals("Wall"))
         {
             gameObject.SetActive(false);
-        }
+        }  
     }
 }
