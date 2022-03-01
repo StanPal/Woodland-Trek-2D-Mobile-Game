@@ -38,6 +38,7 @@ public class PlayerCollision : MonoBehaviour
         {
             Debug.Log("HitCoin");
             OnCoinPickup?.Invoke();
+            coin.PlayEffect();
             Destroy(collision.gameObject);
         }
 

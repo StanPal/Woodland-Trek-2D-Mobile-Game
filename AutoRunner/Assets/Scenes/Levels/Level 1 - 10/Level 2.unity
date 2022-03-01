@@ -515,6 +515,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1785423785132781563, guid: 61f9c720c00a321418ce71f472d7a4d9, type: 3}
+      propertyPath: m_Name
+      value: CoinDestroyEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 2472760594748304732, guid: 61f9c720c00a321418ce71f472d7a4d9, type: 3}
       propertyPath: m_Name
       value: Coin
