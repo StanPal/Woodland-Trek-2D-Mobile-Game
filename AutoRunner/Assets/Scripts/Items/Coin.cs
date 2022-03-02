@@ -9,6 +9,7 @@ public class Coin : MonoBehaviour
 
     public void PlayEffect()
     {
+        SoundManager.Instance.PlaySound(1);
         Instantiate(_destroyEffect, this.transform.position, Quaternion.identity);
     }    
 }

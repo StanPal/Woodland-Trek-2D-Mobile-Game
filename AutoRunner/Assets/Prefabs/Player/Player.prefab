@@ -5118,12 +5118,15 @@ MonoBehaviour:
   _isHoldJump: 0
   _moveSpeed: 10
   _airMoveSpeed: 35
+  rayLength: 0.05
   _jumpForce: 10
   _originalJumpForce: 10
   _jumpMultiplier: 1.3
   _jumpChargeSpeed: 1
   _coyoteTime: 0.2
   _jumpBufferTime: 0.2
+  _jumpCoolDown: 0.4
+  jumpTimer: 0
   _wallLayer:
     serializedVersion: 2
     m_Bits: 1024

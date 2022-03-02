@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [Header("For Movement")]
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _airMoveSpeed;
+    [SerializeField] private float rayLength = 0.05f;
 
     [Header("For Jumping")]
     [SerializeField] private float _jumpForce;
@@ -39,9 +40,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpMultiplier;
     [SerializeField] private float _jumpChargeSpeed;
     [SerializeField] private float _coyoteTime = 0.2f;
-    [SerializeField] private float _jumpBufferTime = 0.2f;   
+    [SerializeField] private float _jumpBufferTime = 0.2f;
+    [SerializeField] private float _jumpCoolDown = 0.2f;
+    [SerializeField] private float jumpTimer;
+    private bool isJumpReady; 
     private float coyoteTimeCounter;
-    private float jumpBufferCounter; 
+    private float jumpBufferCounter;
+    private bool canPlayJumpEffect;
     
 
     [Header("Wall Jump")]
@@ -115,7 +120,7 @@ public class PlayerController : MonoBehaviour
             {
                 coyoteTimeCounter -= Time.deltaTime;
             }
-            if(Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump"))
             {
                 jumpBufferCounter = _jumpBufferTime;
             }
@@ -126,6 +131,15 @@ public class PlayerController : MonoBehaviour
             if (coyoteTimeCounter > 0f && Input.GetButtonDown("Jump"))
             {
                 Jump();
+            }
+            if(jumpTimer >= _jumpCoolDown)
+            {
+                isJumpReady = true; 
+            }
+            else
+            {
+                jumpTimer = jumpTimer + Time.deltaTime;
+                isJumpReady = false; 
             }
             if ((_isWallSliding || _wallCheckHit) && Input.GetButtonDown("Jump"))
             {
@@ -185,11 +199,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool IsGrounded()
-    {
-
-        float extraHeight = 0.05f;
+    {        
         Collider2D groundCheck = Physics2D.OverlapCircle(Feet.position, _groundRadius, _groundLayer);
-        RaycastHit2D raycastHit = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeight, _groundLayer);
+        RaycastHit2D raycastHit = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + rayLength, _groundLayer);
         Color rayColor;
 
         if (raycastHit.collider != null)
@@ -203,7 +215,7 @@ public class PlayerController : MonoBehaviour
             StopDust();
             rayColor = Color.red;
         }
-        Debug.DrawRay(_capsuleCollider.bounds.center, Vector2.down * (_capsuleCollider.bounds.extents.y + extraHeight), rayColor);
+        Debug.DrawRay(_capsuleCollider.bounds.center, Vector2.down * (_capsuleCollider.bounds.extents.y + rayLength), rayColor);
 
         if (groundCheck != null)
         {
@@ -241,9 +253,11 @@ public class PlayerController : MonoBehaviour
     #region Jump
 
     public void Jump()
-    {   
-        OnJump?.Invoke();
- 
+    {
+        if (isJumpReady)
+        {
+            OnJump?.Invoke();
+        }
     }
 
     public void HoldJumpPress()
@@ -263,7 +277,7 @@ public class PlayerController : MonoBehaviour
             if (!_isControllerDisabled)
             {
                 jumpBufferCounter = _jumpBufferTime;
-                if (coyoteTimeCounter > 0f && !_isHoldJump && jumpBufferCounter > 0f)
+                if (coyoteTimeCounter > 0f && !_isHoldJump)
                 {
                     _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
                     _animator.SetTrigger("JumpTrigger");
@@ -271,13 +285,15 @@ public class PlayerController : MonoBehaviour
                     StopCoroutine(HoldingJump());
                     coyoteTimeCounter = 0f;
                     jumpBufferCounter = 0f;
+                    jumpTimer = 0f;
+                    SoundManager.Instance.PlayCharacterEffect(0);
+
                 }
                 else if ((_isWallSliding || _wallCheckHit) && _moveX != 0)
                 {
                     _wallJumping = true;
                     Invoke("SetWallJumpingToFalse", _wallJumpTime);
-                    // WallJump();
-                }
+                }                
             }
         }
     }
@@ -301,6 +317,11 @@ public class PlayerController : MonoBehaviour
         _isHoldJump = false;
         _holdTime = 0;
         StopCoroutine(HoldingJump());
+        if(canPlayJumpEffect)
+        {
+            canPlayJumpEffect = false;
+            SoundManager.Instance.PlayCharacterEffect(1);
+        }
     }
     
     private IEnumerator StartHoldTime()
@@ -322,6 +343,7 @@ public class PlayerController : MonoBehaviour
             if (_jumpForce >= _originalJumpForce * _jumpMultiplier)
             {
                 _jumpForce = _originalJumpForce * _jumpMultiplier;
+                canPlayJumpEffect = true;
             }
             _jumpForce += _jumpChargeSpeed;
             ModifyJumpParticle(0.5f);

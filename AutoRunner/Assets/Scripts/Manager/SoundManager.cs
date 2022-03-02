@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _effectsSource;
     [SerializeField] List<AudioClip> _clipList;
+    [SerializeField] List<AudioClip> _sfxList;
+    [SerializeField] List<AudioClip> _characterSound; 
     static bool _onContiniousPlay;
     static float volume;
 
@@ -25,13 +27,10 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        AudioListener.volume = PlayerPrefs.GetFloat("Volume");
         GameManager.OnGameStateChanged += GameManagerOnGameStateChanged;
     }
 
-    private void Start()
-    {
-
-    }
 
     private void GameManagerOnGameStateChanged(GameState state)
     {
@@ -63,12 +62,17 @@ public class SoundManager : MonoBehaviour
     {           
         _musicSource.Stop();
         _musicSource.clip = _clipList[clipIndex];
-        _musicSource.Play();
+        _musicSource.Play();        
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlaySound(int sfxIndex)
     {
-        _effectsSource.PlayOneShot(clip);
+        _effectsSource.PlayOneShot(_sfxList[sfxIndex]);
+    }
+
+    public void PlayCharacterEffect(int CharSfxIndex)
+    {
+        _effectsSource.PlayOneShot(_characterSound[CharSfxIndex]);
     }
 
     public void StopMusic()
@@ -79,6 +83,7 @@ public class SoundManager : MonoBehaviour
     public void ChangeMasterVolume(float value)
     {
         AudioListener.volume = value;
+        PlayerPrefs.SetFloat("Volume", value);
     }
 
     public float UpdateMasterVolume()

@@ -5463,6 +5463,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7399918245743061365, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: m_Volume
+      value: 0.824
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399918245743061365, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7399918246324902268, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
       propertyPath: m_Volume
       value: 0.303
@@ -5471,6 +5479,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7399918246383104006, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: _sfxList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399918246383104006, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: _sfxList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 161c9d66ca72c8a429157019553139d9, type: 3}
+    - target: {fileID: 7399918246383104006, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: _sfxList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 74fbc72d92259fa4eb555815f00be451, type: 3}
+    - target: {fileID: 7399918246383104006, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: _characterSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399918246383104006, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: _characterSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: da38d482a5fcf384ea32d75776508a85, type: 3}
+    - target: {fileID: 7399918246383104006, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
+      propertyPath: _characterSound.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 42fc42037330d8c498104817c483a4bf, type: 3}
     - target: {fileID: 7399918246383104007, guid: bbf75a90017d9a04c97bb3aefb17b4e5, type: 3}
       propertyPath: m_RootOrder
       value: 12
