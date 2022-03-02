@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
     [SerializeField] private float _bounce;
+    [SerializeField] private BounceDir _bounceDirection = BounceDir.up;
+
     private Animator _animator;
     private bool _isActive;
-    [SerializeField] private BounceDir _bounceDirection = BounceDir.up;
 
     enum BounceDir
     {
