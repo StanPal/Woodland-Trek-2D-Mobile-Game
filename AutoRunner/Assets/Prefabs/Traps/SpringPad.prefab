@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bounce: 20
+  _bounceDirection: 2
+  _audioClip: {fileID: 8300000, guid: 161c9d66ca72c8a429157019553139d9, type: 3}
 --- !u!61 &3298883288347605291
 BoxCollider2D:
   m_ObjectHideFlags: 0

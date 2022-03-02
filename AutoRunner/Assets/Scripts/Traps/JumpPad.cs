@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
     [SerializeField] private float _bounce;
+    [SerializeField] private BounceDir _bounceDirection = BounceDir.up;
+
+    private AudioSource _audioSource;
     private Animator _animator;
     private bool _isActive;
-    [SerializeField] private BounceDir _bounceDirection = BounceDir.up;
 
     enum BounceDir
     {
@@ -15,6 +15,11 @@ public class JumpPad : MonoBehaviour
         right,
         up,
         down
+    }
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -46,8 +51,8 @@ public class JumpPad : MonoBehaviour
                         break;
                 }
                 _animator.SetTrigger("PadTrigger");
-                //collision.gameObject.GetComponent<Rigidbody2D>().velocity = (Vector2.up * _bounce);
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.ClampMagnitude(collision.gameObject.GetComponent<Rigidbody2D>().velocity, _bounce);
+                SoundManager.Instance.PlaySound(0);
                 _isActive = true;
             }
         }
