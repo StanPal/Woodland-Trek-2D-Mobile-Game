@@ -8,7 +8,7 @@ public class VolumeSlider : MonoBehaviour
     [SerializeField] private Slider _slider;
     private static float _sliderNum;
 
-    void Start()
+    private void Start()
     {
         _sliderNum = SoundManager.Instance.UpdateMasterVolume();
         SoundManager.Instance.ChangeMasterVolume(_sliderNum);

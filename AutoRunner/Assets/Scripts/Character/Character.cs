@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
     private Animator _animator; 
     private CinemachineVirtualCamera _cmv;
 
-    void Start()
+    private void Start()
     {
         _spawnManager = FindObjectOfType<SpawnManager>();
         _cmv = FindObjectOfType<CinemachineVirtualCamera>();
@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
 
         _spawnManager.OnRespawn += OnRespawn;
         _playerCollision.OnCoinPickup += CoinCollected;
+
 
         _cmv.LookAt = this.transform;
         _cmv.Follow = this.transform;
