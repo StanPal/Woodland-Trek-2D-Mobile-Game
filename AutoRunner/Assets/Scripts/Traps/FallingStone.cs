@@ -50,11 +50,13 @@ public class FallingStone : MonoBehaviour
     {
       _isMovingBack = true;
       _rb.bodyType = RigidbodyType2D.Static;
+      _rayLength = 0f;
         while (Vector2.Distance(transform.position, _startPos.position) > 0.1f)
         {
             transform.position = Vector2.MoveTowards(transform.position, _startPos.position, _returnSpeed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
+       _rayLength = 0.1f;
       _isMovingBack = false;
 
     }
@@ -66,7 +68,7 @@ public class FallingStone : MonoBehaviour
         if(raycastHit.collider != null)
         {
             rayColor = Color.green;
-
+            CinemachineShake.Instance.ShakeCamera(5f, .1f);
         }
         else
         {
@@ -98,6 +100,7 @@ public class FallingStone : MonoBehaviour
             {
                 collision.gameObject.GetComponent<PlayerCollision>().InvokeOnDeath();
             }
+
         }
     }
 }
